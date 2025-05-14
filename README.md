@@ -27,6 +27,9 @@ For serotypes K11, K13, K14, K29, K30, K36, K63 and K64, AlphaFold-generated 3D 
 
 ## FILES:
 
+_packagelist.txt_ 
+List of libraries and versions used to run the code in an Anaconda Environment.
+
 _Motifs_Pipeline.ipynb_
 a Jupyter Notebook that analyses the extracted motifs, conserved proteins, and protein scores.
 
