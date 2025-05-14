@@ -1,0 +1,13 @@
+"esm2_embeddings_loci.csv": available on Zenodo
+"esm2_embeddings_rbp.csv": available on Zenodo
+"phage_host_interactions.csv": available on Zenodo
+"Locibase.json": available on Zenodo
+
+-> "esm2_embeddings_loci_per_protein.csv": generated from the files above by running single_protein_loci.py
+
+-> "combined_embeddings_per_protein.csv": generated from the files above by programs 0-3 (es: 0_original_replica.py)
+
+
+-> "kaptive_results.tsv": generated in the "Motifs_Pipeline.ipynb" exploratory notebook. It requires the additional download of "klebsiella_genomes.zip" from Zenodo. I have added it to the repository.
+
+-> "full_onehost_found.csv": also generated in the "Motifs_Pipeline.ipynb", based on motifs extracted. I have added it to the repository.
