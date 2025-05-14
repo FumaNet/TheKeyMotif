@@ -1,5 +1,5 @@
 # TheKeyMotif
-Repository for the Cognitive Science and Artificial Intelligence Thesis at Tilburg University
+Repository for "The Key Motif", a Cognitive Science and Artificial Intelligence Thesis at Tilburg University.
 
 This thesis extends the PhageHostLearn tool by Boeckaerts et al. (2024, original code can be found at https://github.com/dimiboeckaerts/PhageHostLearn ) to work with individual protein embeddings; it also shows that a One-Hot Encoding approach is viable when the host serotype is identified. 
 
