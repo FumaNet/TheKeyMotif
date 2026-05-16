@@ -57,12 +57,12 @@ def compute_esm2_embeddings_loci_per_protein(general_path, data_suffix='', add=F
     if add:
         embeddings_df = pd.concat([old_embeddings_df, embeddings_df], axis=0, ignore_index=True)
 
-    embeddings_df.to_csv(general_path + '/esm2_embeddings_loci_per_protein' + data_suffix + '.csv', index=False)
-    print("Saved embeddings to:", general_path + '/esm2_embeddings_loci_per_protein' + data_suffix + '.csv')
+    embeddings_df.to_csv('./Data/esm2_embeddings_loci_per_protein' + data_suffix + '.csv', index=False)
+    print("Saved embeddings to: ", './Data/esm2_embeddings_loci_per_protein' + data_suffix + '.csv')
 
     return embeddings_df
 
 
-loci_path = "." # /Locibase.json
+loci_path = ".Data/" # add here your path to Locibase.json, downloaded from the Zenodo repository
 
 compute_esm2_embeddings_loci_per_protein(loci_path)

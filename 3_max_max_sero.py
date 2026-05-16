@@ -13,13 +13,13 @@ predsss = []
 
 
 
-if not os.path.isfile('combined_embeddings_per_protein.csv'):
+if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
     print("Loading and preparing data from scratch...")
 
     # --- LOAD AND PREPARE DATA ---
-    embeddings_loci_protein = pd.read_csv("esm2_embeddings_loci_per_protein.csv")
-    embeddings_rbp = pd.read_csv("esm2_embeddings_rbp.csv")
-    phage_host_interactions = pd.read_csv('phage_host_interactions.csv')
+    embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
+    embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
+    phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
 
     # Reshape the interaction matrix to get (host, phage, label) rows
     interactions_melted = phage_host_interactions.melt(
@@ -51,13 +51,13 @@ if not os.path.isfile('combined_embeddings_per_protein.csv'):
         merged[['label']]
     ], axis=1)
 
-    final_df.to_csv('combined_embeddings_per_protein.csv', index=False)
-    print("Final per-protein dataframe saved as 'combined_embeddings_per_protein.csv'.")
+    final_df.to_csv('Data/combined_embeddings_per_protein.csv', index=False)
+    print("Final per-protein dataframe saved as 'Data/combined_embeddings_per_protein.csv'.")
 
 
 else:
-    print("Loading from existing 'combined_embeddings_per_protein.csv' file.")
-    final_df = pd.read_csv('combined_embeddings_per_protein.csv',
+    print("Loading from existing 'Data/combined_embeddings_per_protein.csv' file.")
+    final_df = pd.read_csv('Data/combined_embeddings_per_protein.csv',
     dtype={'accession': str})
     print("Data loaded successfully.")
 
@@ -79,7 +79,7 @@ grouping_files = [
 
 
 
-df_sero = pd.read_csv("kaptive_results.tsv", sep="\t")
+df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
 
 df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
 

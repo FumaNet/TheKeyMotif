@@ -12,10 +12,10 @@ import random
 predsss = []
 
 # === LOAD MAIN DATASET ===
-if not os.path.isfile('combined_embeddings_per_protein.csv'):
-    embeddings_loci_protein = pd.read_csv("esm2_embeddings_loci_per_protein.csv")
-    embeddings_rbp = pd.read_csv("esm2_embeddings_rbp.csv")
-    phage_host_interactions = pd.read_csv('phage_host_interactions.csv')
+if not os.path.isfile('Data/ombined_embeddings_per_protein.csv'):
+    embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
+    embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
+    phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
 
     interactions_melted = phage_host_interactions.melt(
         id_vars=['Unnamed: 0'], var_name='phage_ID', value_name='label'
@@ -41,12 +41,12 @@ if not os.path.isfile('combined_embeddings_per_protein.csv'):
         merged[['label']]
     ], axis=1)
 
-    final_df.to_csv('combined_embeddings_per_protein.csv', index=False)
+    final_df.to_csv('Data/combined_embeddings_per_protein.csv', index=False)
 else:
-    final_df = pd.read_csv('combined_embeddings_per_protein.csv', dtype={'accession': str})
+    final_df = pd.read_csv('Data/combined_embeddings_per_protein.csv', dtype={'accession': str})
 
 # === LOAD ADDITIONAL DATA ===
-df_sero = pd.read_csv("kaptive_results.tsv", sep="\t")
+df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
 df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
 
 df_motifs = pd.read_csv("SingleHostProteins/full_onehost_found.csv")
@@ -161,7 +161,7 @@ else:
     print(f"Final evaluation failed due to single-class predictions.")
 
 all_predictions_df = pd.concat(all_predictions, ignore_index=True)
-all_predictions_df.to_csv("validation_predictions_random_control.csv", index=False)
+all_predictions_df.to_csv("Results/validation_predictions_random_control.csv", index=False)
 print("Saved all validation predictions.")
 
 with open('Results/6a_AUCs_motif_vs_random_100.pkl', 'wb') as f:
