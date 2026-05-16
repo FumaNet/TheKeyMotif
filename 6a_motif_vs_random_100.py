@@ -12,7 +12,7 @@ import random
 predsss = []
 
 # === LOAD MAIN DATASET ===
-if not os.path.isfile('Data/ombined_embeddings_per_protein.csv'):
+if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
     embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
     embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
     phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
@@ -49,7 +49,7 @@ else:
 df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
 df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
 
-df_motifs = pd.read_csv("SingleHostProteins/full_onehost_found.csv")
+df_motifs = pd.read_csv("Data/full_onehost_found.csv")
 
 with open("grouping/grouping_1.pkl", 'rb') as f:
     groups_dictionary = pickle.load(f)

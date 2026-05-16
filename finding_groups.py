@@ -150,7 +150,7 @@ xgb.fit(features_esm2, labels)
 # xgb.save_model('phagehostlearn_vbeta.json')
 
 # if we want to set a threshold for grouping
-matrix = np.loadtxt('all_loci_score_matrix.txt', delimiter='\t')
+matrix = np.loadtxt('Data/all_loci_score_matrix.txt', delimiter='\t')
 # matrix = features_lan
 group_i = 0
 new_groups = [np.nan] * len(groups_loci)

@@ -63,6 +63,6 @@ def compute_esm2_embeddings_loci_per_protein(general_path, data_suffix='', add=F
     return embeddings_df
 
 
-loci_path = ".Data/" # add here your path to Locibase.json, downloaded from the Zenodo repository
+loci_path = "Data/" # add here your path to Locibase.json, downloaded from the Zenodo repository
 
 compute_esm2_embeddings_loci_per_protein(loci_path)
