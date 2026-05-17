@@ -1,7 +1,7 @@
 # TheKeyMotif
 Repository for "Protein-level prediction of Klebsiella phage adsorption identifies conserved receptor-binding motifs" by Francesco Fumagalli and Dr. Giacomo Spigler.
 
-This thesis extends the PhageHostLearn tool by Boeckaerts et al. (2024, original code can be found at https://github.com/dimiboeckaerts/PhageHostLearn ) to work with individual protein embeddings; it also shows that a One-Hot Encoding approach is viable when the host serotype is identified. 
+This paper extends the PhageHostLearn tool by Boeckaerts et al. (2024, original code can be found at https://github.com/dimiboeckaerts/PhageHostLearn ) to work with individual protein embeddings; it also shows that a One-Hot Encoding approach is viable when the host serotype is identified. 
 
 Having identified individual proteins as sufficient for determining adsorption, conserved elements among phages infecting the same serotype are searched for: full results, including meme results and individual conserved sequences for all serotypes with at least 3 infecting phages, are available in the Motifs_KO folder. Reported results (in the paper) focused on the serotypes with at least 6 infecting phages: K11, K13, K14, K29, K30, K36, K63 and K64, for which AlphaFold-generated 3D structures and .cif files with the identified motif highlighted are also uploaded in the respective subfolders.
 
