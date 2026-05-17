@@ -95,7 +95,7 @@ for i, threshold in enumerate(thresholds):
 
         xgb = XGBClassifier(
             scale_pos_weight=1 / imbalance,
-            learning_rate=0.05,
+            learning_rate=0.3,
             n_estimators=250,
             max_depth=7,
             eval_metric='logloss',
