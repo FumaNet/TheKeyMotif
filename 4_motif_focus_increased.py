@@ -88,7 +88,7 @@ for i, threshold in enumerate(thresholds):
     logo = LeaveOneGroupOut()
     scores_max, label_max = [], []
     all_predictions = []
-    pbar = tqdm(total=len(set(final_df['group_loci'])), desc=f"LOGO CV @ %")
+    pbar = tqdm(total=len(set(final_df['group_loci'])), desc=f"LOGO CV @ {tstr[i]}%")
     
     for train_index, test_index in logo.split(final_df, final_df['label'], final_df['group_loci']):
         train_df = final_df.iloc[train_index].copy()

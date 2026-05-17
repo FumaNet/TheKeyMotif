@@ -117,8 +117,8 @@ for i, threshold in enumerate(thresholds):
         test_df = test_df.drop(columns=host_cols)
 
         # --- Merge serotype info ---
-        print("Match Type != Typeable: ", len(df_sero[df_sero["Match confidence"] != "Typeable"]))
-        print("Best match type == Capsule null: ", len(df_sero[df_sero["Best match type"] == "Capsule null"]))
+        # print("Match Type != Typeable: ", len(df_sero[df_sero["Match confidence"] != "Typeable"]))
+        # print("Best match type == Capsule null: ", len(df_sero[df_sero["Best match type"] == "Capsule null"]))
 
         df_sero_filtered = df_sero.copy()
 

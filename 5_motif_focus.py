@@ -88,7 +88,7 @@ for i, threshold in enumerate(thresholds):
     logo = LeaveOneGroupOut()
     scores_max, label_max = [], []
     all_predictions = []
-    pbar = tqdm(total=len(set(final_df['group_loci'])), desc=f"LOGO CV @ 90%")
+    pbar = tqdm(total=len(set(final_df['group_loci'])), desc=f"LOGO CV @ {tstr[i]}%")
     
     for train_index, test_index in logo.split(final_df, final_df['label'], final_df['group_loci']):
         train_df = final_df.iloc[train_index].copy()
@@ -184,8 +184,8 @@ if len(scores_max) == 0:
     print("No valid folds across all thresholds. Nothing to evaluate.")
 else:
     try:
-        scores_max = np.concatenate(scores_max)
-        label_max = np.concatenate(label_max)
+        # scores_max = np.concatenate(scores_max)  # Should alredy be concatenated
+        # label_max = np.concatenate(label_max)    # Should alredy be concatenated 
 
         if len(set(label_max)) > 1:
             fpr, tpr, _ = roc_curve(label_max, scores_max)
