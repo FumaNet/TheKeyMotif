@@ -277,23 +277,47 @@ def bootstrap_ci(labels, scores, n_boot=N_BOOT, seed=RNG_SEED):
                 n_valid_boots=len(roc_vals))
 
 
-def evaluate(pred, inter_path, stratum_map, label_stratified=True):
-    inter = pd.read_csv(inter_path)
-    merged = inter.merge(pred, left_on=["phage", "strain"], right_on=["phage", "strain"],
-                          how="left")
-    n_missing = merged.score.isna().sum()
-    merged["stratum"] = merged.phage.map(stratum_map)
-
+def _score_scope(m, label):
+    """m: a merged (label, score, stratum) frame already restricted to one
+    host scope. Returns the overall + per-stratum metrics dict for it."""
     results = {}
-    m = merged.dropna(subset=["score"])
     results["overall"] = compute_metrics(m.label.values, m.score.values)
     results["overall"]["base_rate"] = m.label.mean()
-    results["overall"]["n_missing_predictions"] = int(n_missing)
-
     for s in ("novel", "related", "near-identical"):
         sub = m[m.stratum == s]
         if len(sub):
             met = compute_metrics(sub.label.values, sub.score.values)
             met["base_rate"] = sub.label.mean()
             results[s] = met
-    return results, merged
+    return results
+
+
+def evaluate(pred, inter_path, stratum_map, unseen_kl_hosts=()):
+    """Returns ({"incl_unseen_kl": {...}, "excl_unseen_kl": {...}}, merged).
+
+    incl_unseen_kl: every pair, including the hosts whose KL type has no
+      training one-hot column (all-zero serotype vector) -- the fair
+      deployment-realistic number, since a real query set will contain
+      capsule types the training vocabulary never saw.
+    excl_unseen_kl: same pairs minus those hosts -- the fair measure of the
+      model as designed/trained, isolating genuine RBP-side generalisation
+      from a host-side vocabulary gap that has nothing to do with RBP
+      novelty. Both are legitimate; conflating them understates the model
+      (the incl number is dragged down by a problem the excl number shows
+      isn't there for known capsule types) and overstates deployment
+      readiness (the excl number hides how often real queries will hit an
+      unseen KL type).
+    """
+    inter = pd.read_csv(inter_path)
+    merged = inter.merge(pred, left_on=["phage", "strain"], right_on=["phage", "strain"],
+                          how="left")
+    n_missing = merged.score.isna().sum()
+    merged["stratum"] = merged.phage.map(stratum_map)
+    m = merged.dropna(subset=["score"])
+
+    out = {"incl_unseen_kl": _score_scope(m, "incl_unseen_kl")}
+    out["incl_unseen_kl"]["overall"]["n_missing_predictions"] = int(n_missing)
+    m_excl = m[~m.strain.isin(unseen_kl_hosts)]
+    out["excl_unseen_kl"] = _score_scope(m_excl, "excl_unseen_kl")
+    out["excl_unseen_kl"]["overall"]["n_missing_predictions"] = int(n_missing)
+    return out, merged
