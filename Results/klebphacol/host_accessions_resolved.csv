@@ -1,0 +1,6 @@
+strain,accession,assembly_level,source_db,n_candidates,reason,resolution
+NCTC_7427,GCF_983172345.1,Contig,RefSeq,1,Only assembly in Klebsiella matching strain-name search 'NCTC 7427'. Organism: Klebsiella pneumoniae.,name-based
+NCTC_13368,GCF_900451875.1,Contig,RefSeq,1,"Quoted-phrase search for 'NCTC 13368' found nothing; unquoted/no-space 'NCTC13368' (matching NCBI's own strain field, which has no space) found exactly one hit. Organism: Klebsiella quasipneumoniae (reclassified member of the K. pneumoniae species complex, not K. pneumoniae sensu stricto -- noted, not corrected).",name-based
+NCTC_13438,GCF_020251405.1,Contig,RefSeq,1,Only assembly matching strain-name search 'NCTC 13438'. Organism: Klebsiella pneumoniae.,name-based
+NCTC_13443,GCF_900451585.1,Contig,RefSeq,1,Quoted 'NCTC 13443' found nothing; no-space 'NCTC13443' found exactly one hit. Organism: Klebsiella pneumoniae.,name-based
+ATCC_11296,GCF_000826585.2,Scaffold,RefSeq,2,"2 hits for 'ATCC 11296', but both are versions of the SAME base assembly (GCF_000826585.1, Contig, 2015 vs GCF_000826585.2, Scaffold, 2017) -- not two distinct candidate strains, so not an ambiguous case requiring a judgement call. Used the later version, which supersedes the earlier one. Organism: Klebsiella pneumoniae subsp. ozaenae.",name-based
