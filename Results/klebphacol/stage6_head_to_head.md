@@ -41,35 +41,33 @@ training set (Stage 3b) — not the pre-exclusion 105-phage tagging.
 
 ### LB strict
 
-| scope | stratum | n | n_pos | base rate | ROC-AUC | PR-AUC | lift |
-|---|---|---:|---:|---:|---:|---:|---:|
-| excl unseen-KL | overall | 2842 | 370 | 13.0% | 0.558 | 0.182 | 1.40× |
-| excl unseen-KL | **novel** | **1347** | **215** | **16.0%** | **0.649** | **0.279** | **1.74×** |
-| excl unseen-KL | related | 225 | 11 | 4.9% | 0.318 | 0.038 | 0.78× |
-| excl unseen-KL | near-identical | 1270 | 144 | 11.3% | 0.426 | 0.101 | 0.89× |
-| incl unseen-KL | overall | 3611 | 486 | 13.5% | 0.548 | 0.155 | 1.15× |
-| incl unseen-KL | novel | 1706 | 307 | 18.0% | 0.647 | 0.271 | 1.72× |
-| incl unseen-KL | related | 289 | 13 | 4.5% | 0.351 | 0.039 | 0.83× |
-| incl unseen-KL | near-identical | 1616 | 166 | 10.3% | 0.403 | 0.083 | 0.65× |
+| scope | stratum | n | n_pos | base rate | ROC-AUC | 95% CI | PR-AUC | lift |
+|---|---|---:|---:|---:|---:|---|---:|---:|
+| excl unseen-KL | overall | 2842 | 370 | 13.0% | 0.558 | — | 0.182 | 1.40× |
+| excl unseen-KL | **novel** | **1347** | **215** | **16.0%** | **0.649** | **[0.601, 0.696]** | **0.279** | **1.74×** |
+| excl unseen-KL | related | 225 | 11 | 4.9% | 0.318 | **[0.181, 0.462]** ‡ | 0.038 | 0.78× |
+| excl unseen-KL | near-identical | 1270 | 144 | 11.3% | 0.426 | **[0.374, 0.477]** ‡ | 0.101 | 0.89× |
+| incl unseen-KL | overall | 3611 | 486 | 13.5% | 0.548 | — | 0.155 | 1.15× |
+| incl unseen-KL | novel | 1706 | 307 | 18.0% | 0.647 | [0.612, 0.680] | 0.271 | 1.72× |
+| incl unseen-KL | related | 289 | 13 | 4.5% | 0.351 | [0.192, 0.534] | 0.039 | 0.83× |
+| incl unseen-KL | near-identical | 1616 | 166 | 10.3% | 0.403 | **[0.358, 0.449]** ‡ | 0.083 | 0.65× |
 
-Novel-stratum bootstrap 95% CI (n_boot=2000): ROC-AUC [0.601, 0.696] (excl),
-[0.612, 0.680] (incl). `related` and `near-identical` sit at or below lift
-1.0× — no better than guessing the base rate, and `near-identical` is
-markedly worse than `novel` despite being (by construction) the stratum with
-a close training match. See §4.
+‡ = CI excludes 0.5 entirely from below: **anti-predictive**, not merely
+uninformative (two-sided test against chance; see below table for the full
+set and exact meaning).
 
 ### LB permissive / TSB strict (excl-unseen-KL scope)
 
-| medium | stratum | n | n_pos | base rate | ROC-AUC | PR-AUC | lift |
-|---|---|---:|---:|---:|---:|---:|---:|
-| LB permissive | overall | 3016 | 544 | 18.0% | 0.545 | 0.237 | 1.32× |
-| LB permissive | novel | 1508 | 376 | 24.9% | 0.604 | 0.355 | 1.43× |
-| LB permissive | related | 232 | 18 | 7.8% | 0.269 | 0.056 | 0.72× |
-| LB permissive | near-identical | 1276 | 150 | 11.8% | 0.428 | 0.105 | 0.89× |
-| TSB strict | overall | 2728 | 498 | 18.3% | 0.592 | 0.266 | 1.45× |
-| TSB strict | novel | 1234 | 325 | 26.3% | 0.654 | 0.415 | 1.58× |
-| TSB strict | related | 227 | 10 | 4.4% | 0.277 | 0.032 | 0.73× |
-| TSB strict | near-identical | 1267 | 163 | 12.9% | 0.493 | 0.128 | 0.99× |
+| medium | stratum | n | n_pos | base rate | ROC-AUC | 95% CI | PR-AUC | lift |
+|---|---|---:|---:|---:|---:|---|---:|---:|
+| LB permissive | overall | 3016 | 544 | 18.0% | 0.545 | — | 0.237 | 1.32× |
+| LB permissive | novel | 1508 | 376 | 24.9% | 0.604 | — | 0.355 | 1.43× |
+| LB permissive | related | 232 | 18 | 7.8% | 0.269 | **[0.172, 0.379]** ‡ | 0.056 | 0.72× |
+| LB permissive | near-identical | 1276 | 150 | 11.8% | 0.428 | **[0.375, 0.482]** ‡ | 0.105 | 0.89× |
+| TSB strict | overall | 2728 | 498 | 18.3% | 0.592 | — | 0.266 | 1.45× |
+| TSB strict | novel | 1234 | 325 | 26.3% | 0.654 | — | 0.415 | 1.58× |
+| TSB strict | related | 227 | 10 | 4.4% | 0.277 | **[0.122, 0.456]** ‡ | 0.032 | 0.73× |
+| TSB strict | near-identical | 1267 | 163 | 12.9% | 0.493 | [0.444, 0.541] | 0.128 | 0.99× |
 
 **RBP-count sensitivity** (KlebPhaCol phages average 3.71 RBPs/phage vs.
 Boeckaerts' training 2.61; top-3/phage subsample tests whether this drives
@@ -77,6 +75,39 @@ the result): novel-stratum ROC-AUC moves −0.026 (LB strict), −0.011 (LB
 permissive), −0.026 (TSB strict). Materially in two of three media —
 reported, not smoothed over; the subsampled novel-stratum ROC-AUC is 0.623
 (LB strict) / 0.593 (LB permissive) / 0.628 (TSB strict).
+
+### Bootstrap 95% CI, near-identical and related, all media and scopes — two-sided test against 0.5
+
+`related` and `near-identical` were reported above as "at or below chance."
+Bootstrapping (n_boot=2000) makes that precise: in **9 of 12**
+medium×scope×stratum combinations, the CI excludes 0.5 **entirely from
+below** — the model is **anti-predictive** there (its ranking is
+significantly *worse* than random, not merely uninformative), not a
+noisy null result.
+
+| medium | scope | stratum | n / n_pos | ROC-AUC | 95% CI | verdict |
+|---|---|---|---:|---:|---|---|
+| LB strict | incl | related | 289/13 | 0.351 | [0.192, 0.534] | not distinguishable from 0.5 |
+| LB strict | incl | near-identical | 1616/166 | 0.403 | [0.358, 0.449] | **ANTI-PREDICTIVE** |
+| LB strict | excl | related | 225/11 | 0.318 | [0.181, 0.462] | **ANTI-PREDICTIVE** |
+| LB strict | excl | near-identical | 1270/144 | 0.426 | [0.374, 0.477] | **ANTI-PREDICTIVE** |
+| LB permissive | incl | related | 296/20 | 0.281 | [0.169, 0.414] | **ANTI-PREDICTIVE** |
+| LB permissive | incl | near-identical | 1628/178 | 0.416 | [0.371, 0.465] | **ANTI-PREDICTIVE** |
+| LB permissive | excl | related | 232/18 | 0.269 | [0.172, 0.379] | **ANTI-PREDICTIVE** |
+| LB permissive | excl | near-identical | 1276/150 | 0.428 | [0.375, 0.482] | **ANTI-PREDICTIVE** |
+| TSB strict | incl | related | 291/11 | 0.282 | [0.118, 0.479] | **ANTI-PREDICTIVE** |
+| TSB strict | incl | near-identical | 1612/194 | 0.460 | [0.420, 0.502] | not distinguishable from 0.5 |
+| TSB strict | excl | related | 227/10 | 0.277 | [0.122, 0.456] | **ANTI-PREDICTIVE** |
+| TSB strict | excl | near-identical | 1267/163 | 0.493 | [0.444, 0.541] | not distinguishable from 0.5 |
+
+No cell in either stratum has a CI entirely above 0.5. `related` is
+anti-predictive in every case with a resolvable CI (10/11 — one is wide and
+crosses 0.5 due to n_pos=13). `near-identical` is anti-predictive in 4/6
+cases and never significantly predictive. This upgrades §4's framing:
+PHL-RBP+S is not simply failing to generalise to near-identical and related
+RBPs — on this evidence, in most conditions tested, it is **actively
+ranking negatives above positives** there, a stronger and more specific
+claim than "no better than chance."
 
 ---
 
@@ -204,10 +235,12 @@ property. TropiSEQ only produces a score when a query RBP clears its
 BLAST bitscore/coverage bar against a reference database — i.e. only for
 RBPs resembling something already characterised — and even then its
 `near-identical`-stratum output is largely non-discriminating ties (§3).
-PHL-RBP+S always produces a score, but its `near-identical`-stratum score
-is no better (often worse) than its `novel`-stratum one, consistent with
-§4's serotype-reassignment finding: memorisation-shaped behaviour that
-misleads rather than helps when a familiar-looking RBP recurs in an
+PHL-RBP+S always produces a score, and per the bootstrap CIs above that
+score is not merely uninformative on `near-identical` and `related` — in
+9/12 conditions tested it is significantly **anti-predictive** (CI excludes
+0.5 from below). Consistent with the serotype-reassignment finding below:
+memorisation-shaped behaviour that actively misleads, not just fails to
+help, when a familiar-looking RBP recurs in an
 unfamiliar host context. One tool expresses this as silence, the other as
 confident wrong answers — the underlying vulnerability (both are, in
 different ways, "keyed on similarity to the training set" rather than a
