@@ -1,0 +1,37 @@
+% S4 Appendix -- sensitivity of the external evaluation.
+% Drop into the Supporting information section of the manuscript.
+% \input{S4_appendix_table} pulls in the table produced by s4_appendix_build.py.
+
+\paragraph*{S4 Appendix.}
+\label{S4_Appendix}
+{\bf Sensitivity of the KlebPhaCol evaluation to medium, label mapping and host
+scope.} The external evaluation involves three choices that the main text
+reports under a single primary setting. This appendix reports every stratum
+under all combinations of those choices, so that the primary results can be
+judged against the alternatives.
+
+First, KlebPhaCol reports host-range values in two growth media. LB is used
+throughout the main text; TSB is reported here as a sensitivity analysis.
+
+Second, KlebPhaCol distinguishes productive infection from undetermined lysis.
+Because the source matrices underlying our training data confirmed positives by
+planktonic killing rather than plaque formation, neither mapping is
+unambiguously correct: the strict mapping excludes undetermined lysis, and the
+permissive mapping treats it as positive. Base rates differ substantially
+between the two, which is why lift rather than bare PR-AUC is the comparable
+quantity.
+
+Third, 16 of the 74 KlebPhaCol hosts carry capsule types absent from the
+training vocabulary and therefore receive an all-zero serotype encoding. Metrics
+are reported both across all hosts, which measures deployment on an unseen
+capsule vocabulary, and restricted to hosts whose capsule type the model was
+trained to represent, which measures the model as designed.
+
+Confidence intervals are given two ways. Pair-level intervals resample pairs and
+treat each as independent. Phage-level intervals resample KlebPhaCol phages, and
+are the appropriate interval wherever test proteins are concentrated on a small
+number of training matches: in the near-identical stratum all 34 RBPs match one
+of two training phages, so pair-level intervals there understate the uncertainty
+considerably.
+
+\input{S4_appendix_table}
