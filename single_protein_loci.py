@@ -35,18 +35,33 @@ def compute_esm2_embeddings_loci_per_protein(general_path, data_suffix='', add=F
     accessions = []
     protein_indices = []
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
     for key in tqdm(loci_dict.keys(), desc="Embedding loci proteins"):
         for idx, sequence in enumerate(loci_dict[key]):
             data = [(f"{key}_prot_{idx}", sequence)]
-            batch_labels, batch_strs, batch_tokens = batch_converter(data)
-            with torch.no_grad():
-                results = model(batch_tokens, repr_layers=[33], return_contacts=True)
-            token_representations = results["representations"][33]
-            protein_embedding = token_representations[0, 1 : len(sequence) + 1].mean(0).numpy()
+            _, _, batch_tokens = batch_converter(data)
+            batch_tokens = batch_tokens.to(device)
+            try:
+                with torch.no_grad():
+                    results = model(batch_tokens, repr_layers=[33],
+                                    return_contacts=False)   # <-- the fix
+                rep = results["representations"][33]
+                emb = rep[0, 1:len(sequence) + 1].mean(0).cpu().numpy()
+            except torch.cuda.OutOfMemoryError:
+                # rare very long locus protein: fall back to CPU for this one
+                torch.cuda.empty_cache()
+                with torch.no_grad():
+                    results = model.cpu()(batch_tokens.cpu(), repr_layers=[33],
+                                          return_contacts=False)
+                rep = results["representations"][33]
+                emb = rep[0, 1:len(sequence) + 1].mean(0).numpy()
+                model = model.to(device)
 
             accessions.append(key)
             protein_indices.append(idx)
-            protein_representations.append(protein_embedding)
+            protein_representations.append(emb)
 
     # Save results
     embeddings_df = pd.concat([
