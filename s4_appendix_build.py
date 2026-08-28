@@ -117,24 +117,22 @@ def main():
         return "--" if pd.isna(lo) else f"{lo:.3f}--{hi:.3f}"
 
     lines = [
-        r"\begin{table}[h]", r"\centering", r"\small",
-        r"\caption{{\bf Sensitivity of external-evaluation results to growth "
-        r"medium, label mapping and host scope.} Lift is PR-AUC divided by the "
-        r"base rate of that stratum. Pair-level intervals treat every pair as "
-        r"independent; phage-level intervals resample KlebPhaCol phages and are "
-        r"the appropriate interval where test RBPs are concentrated on few "
-        r"training matches.}",
-        r"\begin{tabular}{lllrrrrrrr}", r"\hline",
-        r"Medium & Mapping & Scope & Stratum & $n$ & pos. & Base & ROC-AUC "
-        r"& CI (pair) & CI (phage) \\", r"\hline"]
+            r"\begin{table}[h]", r"\centering", r"\small",
+            r"\caption{{\bf Sensitivity of external-evaluation results to growth "
+            r"medium, label mapping and host scope.} Lift is PR-AUC divided by the "
+            r"base rate of that stratum. Pair-level intervals treat every pair as "
+            r"independent; phage-level intervals resample KlebPhaCol phages.}",
+            r"\begin{tabular}{llllrrrrrrr}", r"\hline",
+            r"Medium & Mapping & Scope & Stratum & $n$ & pos. & Base & ROC-AUC "
+            r"& CI (pair) & PR-AUC & Lift \\", r"\hline"]
     for _, r in out.iterrows():
         lines.append(
             f"{r.medium} & {r.mapping} & {r.scope} & {r.stratum} & {r.n} & "
             f"{r.n_pos} & {r.base_rate}\\% & {r.roc_auc:.3f} & "
-            f"{ci(r.roc_lo_pair, r.roc_hi_pair)} & "
-            f"{ci(r.roc_lo_phage, r.roc_hi_phage)} \\\\")
+            f"{ci(r.roc_lo_pair, r.roc_hi_pair)} & {r.pr_auc:.3f} & "
+            f"{r.lift:.2f} \\\\")
     lines += [r"\hline", r"\end{tabular}", r"\label{tab:s4_sensitivity}",
-              r"\end{table}"]
+                r"\end{table}"]
     open("S4_appendix_table.tex", "w").write("\n".join(lines) + "\n")
     print("\nwrote S4_appendix_table.csv and S4_appendix_table.tex")
 
