@@ -1,0 +1,44 @@
+# --- editor and OS junk ---
+*.bak
+*.pyc
+__pycache__/
+.DS_Store
+desktop.ini
+Thumbs.db
+.ipynb_checkpoints/
+
+# --- environments ---
+.venv/
+venv/
+env/
+
+# --- derived artifacts: regenerable from the scripts in analysis/ ---
+data/esm2_embeddings_rbp.csv
+data/esm2_embeddings_loci.csv
+data/esm2_embeddings_loci_per_protein.csv
+data/cache/
+results/klebphacol/stage3_rbp_embeddings.npy
+results/*_checkpoint*.pkl
+
+# --- third-party sequence data (see data/README.md for sources) ---
+data/genomes/
+data/*.zip
+
+# --- third-party model and supplementary files ---
+data/tropiseq/TropiSEQ_model/
+data/tropiseq/TropiSEQ_model.zip
+data/klebphacol/*.docx
+data/klebphacol/*.xlsb
+
+# --- structure models from the withdrawn analysis ---
+motifs/**/*.cif
+
+# --- MEME scratch output ---
+motifs/foldwise/**/logo*.eps
+
+# --- ad hoc validation-prediction dumps from the withdrawn motif analysis ---
+motifs/occurrences/Analysis/validation_predictions_*.csv
+
+# Keep the motif occurrence files that Fig 5 depends on:
+!motifs/occurrences/**/*_fasta.txt
+!motifs/occurrences/**/*.meme
