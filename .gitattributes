@@ -1,0 +1,5 @@
+* text=auto
+
+*.pkl binary
+*.npy binary
+*.eps binary
