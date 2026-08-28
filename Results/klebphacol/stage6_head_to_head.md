@@ -209,23 +209,73 @@ to a new host context.** A caution for any pipeline (this one included)
 that treats "this protein looks like one I've seen" as license to reuse its
 associated supervision.
 
-**RBP-level and genome-level redundancy controls do not nest.** Stage 2's
-genome-ANI screen (>95% whole-genome ANI → exclude) and Stage 2b's
-RBP-identity screen (>95% RBP identity → exclude) disagree in both
-directions on the same 105-phage training set:
-- K7PH164C4 is flagged by genome ANI (96.2% to KlebPhaCol's Roth50) but has
-  **no RBP above 95% identity to anything in KlebPhaCol** — a genomically
-  similar phage whose RBPs happen not to be the similar part.
-- K2064PH2, K30lambda2, K40PH129C1, K52PH129C1 carry an RBP ≥95% identical
-  to a KlebPhaCol RBP but were never anyone's best genome-ANI hit above
-  95% — an RBP shared or recombined across phages whose genomes otherwise
-  diverged enough to be genuinely different.
+**CORRECTED** (an earlier version of this section misstated the K7PH164C4
+and K40PH129C1 cases; verified and fixed below — see the two paragraphs
+after the table for what was wrong and why).
 
-Genome ANI is the wrong redundancy control for an RBP-based predictor, in
-both directions — it both misses real feature-level leakage (case 2) and
-over-excludes on the strength of whole-genome similarity that the model
-never actually sees (case 1). RBP-identity is exclusion Stage 4 trained
-against; genome-ANI exclusion (Stage 2) was superseded, not used.
+**RBP-identity exclusion (argmax-based) has a real blind spot when several
+training phages cluster tightly around the same query.** Re-checked every
+number below directly, on the same 193-RBP set and metric the
+stratification uses (normalised Levenshtein, RBPdetect≥0.5, 200–1500 aa),
+against both the genome-ANI screen (Stage 2) and the RBP-identity screen
+(Stage 2b, which drives the actual training exclusion):
+
+| phage | genome ANI (best hit) | is genome-ANI argmax >95%? | max RBP identity (193-set) | on 7-phage RBP-exclusion list? |
+|---|---|---|---|---|
+| K7PH164C4 | 96.19% (Roth50) | **yes** | **98.31%** (4 distinct RBPs, 95.9–98.3%) | **no** |
+| K2064PH2 | 95.57%* | no | 97.21% | yes |
+| K30lambda2 | 95.73%* | no | 98.93% | yes |
+| K40PH129C1 | 90.58% | no | **26.53%** | yes (via a DepoScope-only RBP outside the 193-set — see below) |
+| K52PH129C1 | 95.83%* | no | 98.61% | yes |
+
+\* raw pairwise ANI >95% to some KlebPhaCol phage, but not that phage's own
+best (argmax) hit across all 105 Boeckaerts phages — confirmed by
+re-deriving the argmax exclusion set directly from the raw ANI data.
+
+**K7PH164C4 is not an example of genome-ANI catching something RBP-identity
+misses — both would flag it if computed consistently, and the real finding
+is why the original computation didn't.** Traced all four of its matches
+(Roth37/39/49/50's respective RBPs) back to their full-274-RBP context: in
+every case, K7PH164C4 is the **2nd- or 3rd-best** hit (95.9–98.3%), narrowly
+beaten by K30lambda2 and/or K32PH164C1 (98.1–98.9%) — both of which *are* on
+the exclusion list. The argmax rule excludes only the single best-scoring
+phage per query RBP, so when three phages cluster within ~3 identity points
+of each other, only the winner gets excluded and the runners-up stay in
+training. Stage 3b's restratification then correctly re-detects K7PH164C4
+as the new best surviving match once its former competitors are removed —
+which is exactly why Roth37/39/49/50 are (correctly) labelled
+near-identical, not novel. The metrics were never wrong; the Stage 6 prose
+citing K7PH164C4 as a "genome flags it, RBP-identity doesn't" example was.
+The real lesson is sharper than the one originally stated: **single-best-hit
+exclusion under-excludes when training contains near-duplicate phages**,
+and a stricter rule (exclude every training phage within some margin of the
+best hit, not just the winner) would be more conservative.
+
+**K40PH129C1 does not belong in the "RBP-identity flags it, genome-ANI
+misses it" list at all.** It only reached the original 7-phage exclusion
+list via a KlebPhaCol RBP that passed DepoScope≥0.5 but not RBPdetect≥0.5 —
+outside the 193-RBP set the stratification and model training actually use.
+Checked directly against the 193-set: its max identity to any KlebPhaCol
+RBP is 26.53%, nowhere near the 95% threshold. Excluding it from training
+was harmlessly conservative (removing a phage that turns out not to be
+RBP-similar doesn't hurt anything), but it should not have been cited as
+evidence of RBP-level leakage genome-ANI misses.
+
+**K2064PH2, K30lambda2, K52PH129C1 remain valid examples of RBP-identity
+catching what genome-ANI's own best-hit screen does not** — genuinely their
+own argmax RBP match (not runners-up), each ≥97% identical on the 193-set,
+each confirmed absent from the genome-ANI argmax-exclusion set by
+re-deriving it from the raw ANI data.
+
+Genome ANI is still the wrong redundancy control for an RBP-based
+predictor — it can flag a phage (K7PH164C4, correctly, on genome grounds)
+whose RBP-level similarity a single-best-hit RBP screen then fails to
+independently catch for a structural reason (clustering), and it
+independently misses RBP-level leakage that genome similarity alone
+wouldn't predict (K2064PH2, K30lambda2, K52PH129C1). RBP-identity is the
+exclusion Stage 4 actually trained against; genome-ANI exclusion (Stage 2)
+was superseded, not used — and, per the above, arguably should be tightened
+rather than treated as equivalent to a stricter RBP screen.
 
 **Both tools degrade on phages resembling previously characterised ones,
 via different mechanisms.** TropiSEQ's coverage and PHL-RBP+S's
