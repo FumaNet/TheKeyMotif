@@ -106,14 +106,3 @@ attributable to leakage.
   torch_geometric + Zenodo 14065540 weights). Tests whether attention
   discriminates among a prophage's depolymerases. Necessary-not-sufficient:
   spread shows the model CAN discriminate, not that it does so CORRECTLY.
-- KlebPhaCol head-to-head benchmark (external to both models).
-- Desk corrections listed above.
-
-## Working style
-
-- Verify before asserting. Several claims in this project turned out wrong on
-  inspection (the `drop_duplicates` no-op, the motif selection rule, the
-  `protein_sequence` column name). Check the data.
-- When a result looks surprising, first ask whether the harness is at fault.
-- Distinguish "necessary" from "sufficient" in claims about attribution.
-- Do not overwrite `Results_published/`.
