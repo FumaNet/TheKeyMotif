@@ -102,7 +102,8 @@ for i, threshold in enumerate(thresholds):
             use_label_encoder=False,
             tree_method="gpu_hist",
             predictor="gpu_predictor",
-            max_bin=256
+            max_bin=256,
+            random_state=0
         )
         xgb.fit(X_train, y_train)
 

@@ -144,8 +144,8 @@ features_esm2 = features_lan
 
 imbalance = sum([1 for i in labels if i==1]) / sum([1 for i in labels if i==0])
 xgb = XGBClassifier(scale_pos_weight=1/imbalance, learning_rate=0.3, n_estimators=250, max_depth=9,
-                    eval_metric='logloss', use_label_encoder=False, 
-                    tree_method = "hist", device = "cuda")  # Uses GPU for inference (optional))
+                    eval_metric='logloss', use_label_encoder=False,
+                    tree_method = "hist", device = "cuda", random_state=0)  # Uses GPU for inference (optional))
 xgb.fit(features_esm2, labels)
 # xgb.save_model('phagehostlearn_vbeta.json')
 

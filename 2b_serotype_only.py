@@ -116,6 +116,7 @@ def main():
                 scale_pos_weight=1 / imbalance,
                 learning_rate=0.3, n_estimators=250, max_depth=7,
                 eval_metric="logloss", tree_method="hist", device=DEVICE,
+                random_state=0,
             )
             xgb.fit(S_tr, y_train)
             score = xgb.predict_proba(S_te)[:, 1]

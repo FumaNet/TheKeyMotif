@@ -123,7 +123,8 @@ for i, threshold in enumerate(thresholds):
             use_label_encoder=False,
             tree_method="gpu_hist",
             predictor="gpu_predictor",
-            device="cuda"
+            device="cuda",
+            random_state=0
         )
         xgb.fit(X_train, y_train)
 

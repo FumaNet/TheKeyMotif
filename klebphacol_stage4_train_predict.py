@@ -107,6 +107,7 @@ def train_model():
         eval_metric="logloss",
         tree_method="hist",
         device="cpu",
+        random_state=0,
     )
     print("Training (no CV, single model, ~480k rows x "
           f"{X.shape[1]} features)...")
