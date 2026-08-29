@@ -12,49 +12,40 @@ Thumbs.db
 venv/
 env/
 
-# NOTE ON CASING: every path below is written against the CURRENT tree
-# (Data/, Motifs_KO/, Results/). The Step-3 restructure renames these to
-# lowercase (data/, motifs/, results/); as the FINAL action of that step,
-# replace every line below with its new-layout path and drop the old one.
-# This mount happens to resolve paths case-insensitively, which is why a
-# stale-cased line doesn't obviously fail here -- it would on a
-# case-sensitive clone (Linux, most CI), so don't leave both variants
-# lying around past the restructure.
-
 # --- derived artifacts: regenerable from the scripts in analysis/ ---
-Data/esm2_embeddings_rbp.csv
-Data/esm2_embeddings_loci.csv
-Data/esm2_embeddings_loci_per_protein.csv
-Data/cache/
-Results/klebphacol/stage3_rbp_embeddings.npy
-Results/*_checkpoint*.pkl
+data/esm2_embeddings_rbp.csv
+data/esm2_embeddings_loci.csv
+data/esm2_embeddings_loci_per_protein.csv
+data/cache/
+results/klebphacol/stage3_rbp_embeddings.npy
+results/*_checkpoint*.pkl
 
 # --- third-party sequence data (see data/README.md for sources) ---
-Data/genomes/
-Data/*.zip
+data/genomes/
+data/*.zip
 
 # --- third-party model and supplementary files ---
-Data/tropiseq/TropiSEQ_model/
-Data/tropiseq/TropiSEQ_model.zip
-Data/klebphacol/*.docx
-Data/klebphacol/*.xlsb
+data/tropiseq/TropiSEQ_model/
+data/tropiseq/TropiSEQ_model.zip
+data/klebphacol/*.docx
+data/klebphacol/*.xlsb
 
 # --- structure models from the withdrawn analysis ---
-Motifs_KO/**/*.cif
+motifs/occurrences/**/*.cif
 
 # --- MEME scratch output ---
-Motifs_foldwise/**/logo*.eps
+motifs/foldwise/**/logo*.eps
 
 # --- fold-internal-motif MEME outputs, archived to Zenodo rather than
 #     committed (~195MB); only input.fasta/kept_motif.txt/foldwise_motifs.csv
 #     are tracked ---
-Motifs_foldwise/**/meme.xml
-Motifs_foldwise/**/meme.html
-Motifs_foldwise/**/meme.txt
+motifs/foldwise/**/meme.xml
+motifs/foldwise/**/meme.html
+motifs/foldwise/**/meme.txt
 
 # --- ad hoc validation-prediction dumps from the withdrawn motif analysis ---
-Motifs_KO/Analysis/validation_predictions_*.csv
+motifs/occurrences/Analysis/validation_predictions_*.csv
 
 # Keep the motif occurrence files that Fig 5 depends on:
-!Motifs_KO/**/*_fasta.txt
-!Motifs_KO/**/*.meme
+!motifs/occurrences/**/*_fasta.txt
+!motifs/occurrences/**/*.meme
