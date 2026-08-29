@@ -1,0 +1,1 @@
+{"consensus": "PFILTNRHRFLNVILDGRNSSVNLMKGVGSDQTQYCRFDSCGIYRWLNGI", "rank": 1, "sites": 9, "evalue": "1.1e-330", "coverage": 1.0, "meme_dir": "Motifs_foldwise/t1.0_train-only_n40w50/K22_9_d11e78b750"}

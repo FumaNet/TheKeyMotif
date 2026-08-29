@@ -1,0 +1,1 @@
+{"consensus": "PDFRNEDDISGKDJVJSFAYIFNYYTSRFLAKQEQKDGTTSRSLSFRLPLRRAGVEPNDPVAFTYDREGGNKEF", "rank": 14, "sites": 6, "evalue": "2.8e-028", "coverage": 1.0, "meme_dir": "Motifs_foldwise/t1.0_train-only/K30_6_48084bf60e"}

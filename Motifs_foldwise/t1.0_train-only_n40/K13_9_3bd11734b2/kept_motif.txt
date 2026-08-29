@@ -1,0 +1,1 @@
+{"consensus": "NYNSGSPGWSIDKNGNAEFSGVTVRGRVEANSGSFGGTLDATDGIFRGAVEANSNVGDJAAMLPFPTKVGSAWKSRIVHH", "rank": 6, "sites": 8, "evalue": "2.8e-064", "coverage": 0.8888888888888888, "meme_dir": "Motifs_foldwise/t1.0_train-only_n40/K13_9_3bd11734b2"}

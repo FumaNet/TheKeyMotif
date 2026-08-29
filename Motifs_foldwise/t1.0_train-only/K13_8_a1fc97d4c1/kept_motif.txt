@@ -1,0 +1,1 @@
+{"consensus": "NTGTTTGWGVIGKNTLRGPVPIVAAPIRPNIZTVAGAGVVY", "rank": 10, "sites": 7, "evalue": "4.7e-043", "coverage": 0.875, "meme_dir": "Motifs_foldwise/t1.0_train-only/K13_8_a1fc97d4c1"}

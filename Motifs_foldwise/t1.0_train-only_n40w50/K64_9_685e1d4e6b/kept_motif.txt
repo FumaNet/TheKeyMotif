@@ -1,0 +1,1 @@
+{"consensus": "DAATAAAASEAAAKTSETNAKASETAATVSKTAAKTSETQT", "rank": 15, "sites": 9, "evalue": "2.3e-022", "coverage": 1.0, "meme_dir": "Motifs_foldwise/t1.0_train-only_n40w50/K64_9_685e1d4e6b"}

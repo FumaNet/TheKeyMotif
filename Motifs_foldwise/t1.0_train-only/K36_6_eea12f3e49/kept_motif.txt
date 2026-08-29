@@ -1,0 +1,1 @@
+{"consensus": "PBGYMVKIVGDTWKEEEKYLVIYDFSQKVDKNTVGINIGVPLEYPTGPWTDLRLEDPKVDJPYVEWPDDRAGDEDTNPQ", "rank": 3, "sites": 5, "evalue": "4.5e-043", "coverage": 0.8333333333333334, "meme_dir": "Motifs_foldwise/t1.0_train-only/K36_6_eea12f3e49"}

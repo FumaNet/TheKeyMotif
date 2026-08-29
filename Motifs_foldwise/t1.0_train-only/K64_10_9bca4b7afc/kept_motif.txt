@@ -1,0 +1,1 @@
+{"consensus": "GADASFYFEEYVGTEHRAIEYMDGFGRT", "rank": 12, "sites": 9, "evalue": "8.6e-044", "coverage": 0.9, "meme_dir": "Motifs_foldwise/t1.0_train-only/K64_10_9bca4b7afc"}

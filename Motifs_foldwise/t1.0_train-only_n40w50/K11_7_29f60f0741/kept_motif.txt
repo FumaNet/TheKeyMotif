@@ -1,0 +1,1 @@
+{"consensus": "ARMIELALETPYIELYFNESPEDFEASLJ", "rank": 27, "sites": 7, "evalue": "7.7e-014", "coverage": 1.0, "meme_dir": "Motifs_foldwise/t1.0_train-only_n40w50/K11_7_29f60f0741"}
