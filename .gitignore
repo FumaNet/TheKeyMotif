@@ -45,6 +45,13 @@ Motifs_KO/**/*.cif
 # --- MEME scratch output ---
 Motifs_foldwise/**/logo*.eps
 
+# --- fold-internal-motif MEME outputs, archived to Zenodo rather than
+#     committed (~195MB); only input.fasta/kept_motif.txt/foldwise_motifs.csv
+#     are tracked ---
+Motifs_foldwise/**/meme.xml
+Motifs_foldwise/**/meme.html
+Motifs_foldwise/**/meme.txt
+
 # --- ad hoc validation-prediction dumps from the withdrawn motif analysis ---
 Motifs_KO/Analysis/validation_predictions_*.csv
 
