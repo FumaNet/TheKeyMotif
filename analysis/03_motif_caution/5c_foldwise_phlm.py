@@ -86,7 +86,7 @@ DESIGN CHOICES, AND WHY
 USAGE
 ---------------------------------------------------------------------------
     python fold_internal_motifs.py --threshold 1.0 --level train-only
-    python 5c_foldwise_phlm.py --motifs Motifs_foldwise/t1.0_train-only/foldwise_motifs.csv
+    python 5c_foldwise_phlm.py --motifs motifs/foldwise/t1.0_train-only/foldwise_motifs.csv
 
 Needs FIMO (MEME Suite) on PATH. --dry-run checks inputs without running it.
 """
@@ -105,6 +105,8 @@ from sklearn.metrics import auc, precision_recall_curve, roc_curve
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")
@@ -182,7 +184,7 @@ def main():
                     help="Which published threshold this corresponds to "
                          "(label only, for the results file).")
     ap.add_argument("--grouping", default="grouping/grouping_1.pkl")
-    ap.add_argument("--rbp", default="Data/RBPbase.csv")
+    ap.add_argument("--rbp", default="data/RBPbase.csv")
     ap.add_argument("--fimo-thresh", type=float, default=1e-4)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()

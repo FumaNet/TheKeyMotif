@@ -9,7 +9,8 @@ import Levenshtein
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-BASE = "/home/claude/TheKeyMotif/Motifs_KO"
+HERE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.join(HERE, "..", "motifs", "occurrences")
 THRESHOLD = 40.0
 MIN_OCC = 3          # need >=3 occurrences for a median over >=3 pairs
 DROP = {"K64O1ab"}   # duplicate of K64: identical motif, identical 10 occurrences
@@ -51,7 +52,7 @@ for r in rows:
           f"{r['pairs_below_30']:>5}{r['pairs_below_40']:>5}")
 print(f"\n{below} of {len(rows)} serotypes have median identity below {THRESHOLD:.0f}%")
 
-with open("Fig5_motif_identity.csv", "w", newline="") as fh:
+with open(os.path.join(HERE, "Fig5_motif_identity.csv"), "w", newline="") as fh:
     w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
 
 fig, ax = plt.subplots(figsize=(9.0, 3.4))
@@ -71,5 +72,5 @@ ax.tick_params(axis="y", labelsize=8)
 for side in ("top", "right"): ax.spines[side].set_visible(False)
 fig.tight_layout()
 for ext in ("png", "pdf"):
-    fig.savefig(f"/mnt/user-data/outputs/Fig5_motif_conservation.{ext}", dpi=300)
+    fig.savefig(os.path.join(HERE, f"Fig5_motif_conservation.{ext}"), dpi=300)
 print("figure written")

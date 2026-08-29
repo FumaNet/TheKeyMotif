@@ -70,8 +70,8 @@ from collections import defaultdict
 
 import pandas as pd
 
-DATA = "Data"
-OUTDIR = "Motifs_foldwise"
+DATA = "data"
+OUTDIR = "motifs/foldwise"
 MIN_COVERAGE = 0.8
 MIN_PHAGES = 6          # pool size floor; the published run used 6 for figures, 3 for training
 MINW, MAXW = 21, 99   # override with --minw/--maxw     # as in the published MEME call

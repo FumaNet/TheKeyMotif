@@ -24,8 +24,8 @@ import os
 import pyxlsb
 import pandas as pd
 
-XLSB_PATH = "Data/klebphacol/Supplementary_Tables_R2.xlsb"
-ALIAS_PATH = "Data/klebphacol/strain_aliases.csv"
+XLSB_PATH = "data/klebphacol/Supplementary_Tables_R2.xlsb"
+ALIAS_PATH = "data/klebphacol/strain_aliases.csv"
 
 # The 4 exceptions found in Stage 1's checkpoint (S4 name -> S1 name), by
 # direct set-difference inspection of the workbook -- not inferred, not
@@ -84,7 +84,7 @@ def load_s2_phage_names():
 
 
 def load_s4_phage_names():
-    lb = pd.read_csv("Results/klebphacol/interactions_LB_strict.csv")
+    lb = pd.read_csv("results/klebphacol/interactions_LB_strict.csv")
     return sorted(lb.phage.unique())
 
 

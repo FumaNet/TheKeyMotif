@@ -10,7 +10,7 @@ on the covered subset (not pooled), with n_pos stated throughout.
 """
 import pandas as pd
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 
 
 def main():

@@ -9,7 +9,7 @@ column) -- see evaluate()'s docstring for why both are legitimate and
 conflating them understates the model. Strata come from the Stage 3b
 correction (restratified against the 250 post-exclusion training RBPs, not
 all 274) -- run klebphacol_stage3b_restratify.py first if
-Results/klebphacol/stage3_rbps_tagged.csv predates that correction.
+results/klebphacol/stage3_rbps_tagged.csv predates that correction.
 """
 import os
 import pickle
@@ -18,7 +18,7 @@ import pandas as pd
 
 import klebphacol_stage4_train_predict as s4
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 N_SUBSAMPLE = round(274 / 105)  # = 3
 
 INTERACTION_FILES = {

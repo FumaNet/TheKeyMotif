@@ -35,7 +35,7 @@ DEVICE = os.environ.get("KM_DEVICE", "cpu")
 
 def make_synthetic(root):
     rng = np.random.default_rng(SEED)
-    data = os.path.join(root, "Data")
+    data = os.path.join(root, "data")
     os.makedirs(data, exist_ok=True)
     os.makedirs(os.path.join(root, "grouping"), exist_ok=True)
 
@@ -96,9 +96,9 @@ def clf():
 # ---------------------------------------------------------------------------
 
 def original_wide_frame():
-    loci = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
-    rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
-    inter = pd.read_csv("Data/phage_host_interactions.csv")
+    loci = pd.read_csv("data/esm2_embeddings_loci_per_protein.csv")
+    rbp = pd.read_csv("data/esm2_embeddings_rbp.csv")
+    inter = pd.read_csv("data/phage_host_interactions.csv")
 
     melted = inter.melt(id_vars=["Unnamed: 0"], var_name="phage_ID",
                         value_name="label").rename(columns={"Unnamed: 0": "accession"})
@@ -160,7 +160,7 @@ def original_script0(final_df, grouping):
 
 
 def original_script3(final_df, grouping):
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")[
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")[
         ["Assembly", "Best match type", "Match confidence"]]
     final_df = final_df.copy()
     final_df["group_loci"] = final_df["accession"].map(grouping)
@@ -235,7 +235,7 @@ def compact_script0(kd, pairs, host_emb, virus_emb, grouping):
 
 
 def compact_script3(kd, pairs, host_emb, virus_emb, grouping):
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")[
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")[
         ["Assembly", "Best match type", "Match confidence"]]
     oh = pd.get_dummies(df_sero["Best match type"], prefix="sero_")
     enc = pd.concat([df_sero[["Assembly"]], oh], axis=1)
@@ -295,7 +295,7 @@ def report(name, a, b):
 def main():
     root = tempfile.mkdtemp(prefix="km_equiv_")
     here = os.getcwd()
-    sys.path.insert(0, here)
+    sys.path.insert(0, os.path.join(here, "src"))
     import keymotif_data as kd
 
     try:

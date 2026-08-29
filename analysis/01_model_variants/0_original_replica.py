@@ -10,13 +10,13 @@ import pickle
 
 predsss = []
 
-if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
+if not os.path.isfile('data/combined_embeddings_per_protein.csv'):
     print("Loading and preparing data from scratch...")
 
     # --- LOAD AND PREPARE DATA ---
-    embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
-    embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
-    phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
+    embeddings_loci_protein = pd.read_csv("data/esm2_embeddings_loci_per_protein.csv")
+    embeddings_rbp = pd.read_csv("data/esm2_embeddings_rbp.csv")
+    phage_host_interactions = pd.read_csv('data/phage_host_interactions.csv')
 
     # Reshape the interaction matrix to get (host, phage, label) rows
     interactions_melted = phage_host_interactions.melt(
@@ -48,15 +48,15 @@ if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
         merged[['label']]
     ], axis=1)
 
-    final_df.to_csv('Data/combined_embeddings_per_protein.csv', index=False)
+    final_df.to_csv('data/combined_embeddings_per_protein.csv', index=False)
     print("Final per-protein dataframe saved as 'combined_embeddings_per_protein.csv'.")
 
 
 else:
     print("Loading from existing 'combined_embeddings_per_protein.csv' file.")
-    final_df = pd.read_csv('Data/combined_embeddings_per_protein.csv',
+    final_df = pd.read_csv('data/combined_embeddings_per_protein.csv',
     dtype={'accession': str})
-    print("Data loaded successfully.")
+    print("data loaded successfully.")
 
 # --- MULTI-THRESHOLD LOGO CROSS-VALIDATION WITH IN-FOLD HOST AVERAGING ---
 thresholds = [1.0, 0.995, 0.99, 0.95, 0.9, 0.85, 0.8, 0.75]
@@ -164,7 +164,7 @@ for i, threshold in enumerate(thresholds):
 
 
 
-file_path = 'Results/0_AUCs_original_replica.pkl'
+file_path = 'results/0_AUCs_original_replica.pkl'
 
 # --- Save (dump) the tuple into a pickle file ---
 with open(file_path, 'wb') as f:

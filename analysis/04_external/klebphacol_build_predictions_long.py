@@ -18,7 +18,7 @@ import pandas as pd
 
 import klebphacol_stage4_train_predict as s4
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 OUT_PATH = "klebphacol_predictions.csv"
 INTERACTION_FILES = {
     ("LB", "strict"): f"{OUT_DIR}/interactions_LB_strict.csv",

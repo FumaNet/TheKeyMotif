@@ -9,7 +9,7 @@ Run from the repo root, with keymotif_data.py alongside it:
 
     python 3_max_max_sero_compact.py
 
-Writes Results/3_AUCs_max_max_sero.pkl in the original format.
+Writes results/3_AUCs_max_max_sero.pkl in the original format.
 
 Verified bit-identical to the original by test_equivalence.py.
 
@@ -30,6 +30,8 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")   # set KM_DEVICE=cpu to fall back
@@ -46,8 +48,8 @@ GROUPING_FILES = [
     "grouping/grouping_800.pkl",
     "grouping/grouping_750.pkl",
 ]
-OUT = "Results/3_AUCs_max_max_sero.pkl"
-CKPT = "Results/3_checkpoint.pkl"
+OUT = "results/3_AUCs_max_max_sero.pkl"
+CKPT = "results/3_checkpoint.pkl"
 ONLY = os.environ.get("KM_THRESHOLDS")
 
 
@@ -55,14 +57,14 @@ def main():
     pairs, host_emb, virus_emb = kd.load()
 
     # --- serotype one-hot, built once (it does not depend on the fold) ---
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
     df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
     one_hot = pd.get_dummies(df_sero["Best match type"], prefix="sero_")
     sero_encoded = pd.concat([df_sero[["Assembly"]], one_hot], axis=1)
     sero_cols = [c for c in sero_encoded.columns if c != "Assembly"]
     print(f"Serotype encoding: {len(sero_cols)} columns")
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     done = pickle.load(open(CKPT, "rb")) if os.path.exists(CKPT) else {}
     if done:
         print(f"Checkpoint found — already complete: {sorted(done)}")

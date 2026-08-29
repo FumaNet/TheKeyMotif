@@ -18,8 +18,8 @@ threshold = 0.75
 file_path = 'grouping/grouping_750.pkl'
 
 
-loci_df = pd.read_csv("Data/esm2_embeddings_loci.csv")
-rbp_df = pd.read_csv("Data/esm2_embeddings_rbp.csv")
+loci_df = pd.read_csv("data/esm2_embeddings_loci.csv")
+rbp_df = pd.read_csv("data/esm2_embeddings_rbp.csv")
 
 
 def dataframe_to_padded_dict(df, key_column, exclude_columns, min_size):
@@ -72,7 +72,7 @@ mode = "train"
 RBP_embeddings = deepcopy(rbp_df)
 loci_embeddings = deepcopy(loci_df)
 
-interactions = pd.read_csv('Data/phage_host_interactions.csv', index_col=0)
+interactions = pd.read_csv('data/phage_host_interactions.csv', index_col=0)
 
 # Comment out this block to work with extended embeddings
 ################################################################################
@@ -150,7 +150,7 @@ xgb.fit(features_esm2, labels)
 # xgb.save_model('phagehostlearn_vbeta.json')
 
 # if we want to set a threshold for grouping
-matrix = np.loadtxt('Data/all_loci_score_matrix.txt', delimiter='\t')
+matrix = np.loadtxt('data/all_loci_score_matrix.txt', delimiter='\t')
 # matrix = features_lan
 group_i = 0
 new_groups = [np.nan] * len(groups_loci)

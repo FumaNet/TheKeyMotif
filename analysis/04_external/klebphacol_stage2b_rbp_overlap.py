@@ -15,7 +15,7 @@ proteins (i.e. most/all ORFs in each phage, not just RBP candidates), 213
 clear this bar (4.1/phage), a scale comparable to Boeckaerts' 274/105 =
 2.6/phage. Using the full 9,973 would compare whole proteomes, not RBPs.
 
-Boeckaerts RBPs: Data/RBPbase.csv, already the curated 274-RBP set (no
+Boeckaerts RBPs: data/RBPbase.csv, already the curated 274-RBP set (no
 further filtering -- this IS Boeckaerts' RBP list, not a scored superset).
 
 Method: rapidfuzz Levenshtein normalized_similarity, all pairs (213 x 274 =
@@ -24,7 +24,7 @@ Method: rapidfuzz Levenshtein normalized_similarity, all pairs (213 x 274 =
 Exclusion rule (supersedes Stage 2's genome-ANI phage rule): any Boeckaerts
 PHAGE carrying an RBP >=95% identical to any KlebPhaCol RBP is excluded from
 training. Both rules' results are reported for comparison, but only the
-RBP-identity rule drives Results/klebphacol/overlap_exclusions.csv, which
+RBP-identity rule drives results/klebphacol/overlap_exclusions.csv, which
 this script rewrites to contain ONLY RBP-identity-triggered phage
 exclusions (hosts are never excluded -- see script docstring in
 klebphacol_stage2_hosts_revised.py for why).
@@ -35,9 +35,9 @@ import pandas as pd
 from rapidfuzz.distance import Levenshtein
 from rapidfuzz import process
 
-XLSB_PATH = "Data/klebphacol/Supplementary_Tables_R2.xlsb"
-RBPBASE_PATH = "Data/RBPbase.csv"
-OUT_PATH = "Results/klebphacol/overlap_exclusions.csv"
+XLSB_PATH = "data/klebphacol/Supplementary_Tables_R2.xlsb"
+RBPBASE_PATH = "data/RBPbase.csv"
+OUT_PATH = "results/klebphacol/overlap_exclusions.csv"
 
 
 def load_klebphacol_rbps():

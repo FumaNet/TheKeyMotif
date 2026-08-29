@@ -51,8 +51,8 @@ import os
 import pyxlsb
 import pandas as pd
 
-XLSB_PATH = "Data/klebphacol/Supplementary_Tables_R2.xlsb"
-OUT_DIR = "Results/klebphacol"
+XLSB_PATH = "data/klebphacol/Supplementary_Tables_R2.xlsb"
+OUT_DIR = "results/klebphacol"
 
 
 def _as_label(v):

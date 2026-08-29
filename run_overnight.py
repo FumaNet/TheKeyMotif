@@ -15,7 +15,7 @@ Design notes:
 * A failing stage does NOT stop the run. The next one starts; the summary at
   the end reports what happened.
 * Each stage's console output is tee'd to logs/<stage>.log for morning reading.
-* Nothing here overwrites Results_published/.
+* Nothing here overwrites results_published/.
 
 The stages:
 
@@ -52,7 +52,7 @@ STAGES = [
     {
         "id": "0",
         "script": "0_original_replica_compact.py",
-        "ckpt": "Results/0_checkpoint.pkl",
+        "ckpt": "results/0_checkpoint.pkl",
         "name": "PHL-AVG (script 0)",
         "why": "finishes the reproduction baseline",
         "est_min_per_threshold": 25,
@@ -60,7 +60,7 @@ STAGES = [
     {
         "id": "2b",
         "script": "2b_serotype_only.py",
-        "ckpt": "Results/2b_checkpoint.pkl",
+        "ckpt": "results/2b_checkpoint.pkl",
         "name": "serotype-only baseline",
         "why": "Reviewer #1 major comment 2 — is PHL-RBP+S memorising serotype?",
         "est_min_per_threshold": 3,
@@ -68,7 +68,7 @@ STAGES = [
     {
         "id": "2c",
         "script": "2c_rbp_only.py",
-        "ckpt": "Results/2c_checkpoint.pkl",
+        "ckpt": "results/2c_checkpoint.pkl",
         "name": "RBP-only baseline",
         "why": "Reviewer #1 major comment 2 — the other half of the bracket",
         "est_min_per_threshold": 8,
@@ -77,7 +77,7 @@ STAGES = [
         "id": "2d",
         "script": "2d_phage_holdout.py",
         "ckpt": None,                       # single split, not per-threshold
-        "out": "Results/2d_phage_holdout.pkl",
+        "out": "results/2d_phage_holdout.pkl",
         "name": "phage-held-out CV",
         "why": "the decisive test for memorised phage-serotype associations",
         "est_min_per_threshold": 100,
@@ -86,7 +86,7 @@ STAGES = [
     {
         "id": "3",
         "script": "3_max_max_sero_compact.py",
-        "ckpt": "Results/3_checkpoint.pkl",
+        "ckpt": "results/3_checkpoint.pkl",
         "name": "PHL-RBP+S (script 3)",
         "why": "headline model; the comparison the baseline is measured against",
         "est_min_per_threshold": 90,
@@ -198,10 +198,10 @@ def main():
         print("\nDry run. Re-run without --dry-run to start.")
         return
 
-    if not os.path.exists("Results_published"):
-        print("\n  WARNING: Results_published/ not found. Back up the original")
-        print("  pickles before running anything that writes to Results/:")
-        print("      Copy-Item -Recurse Results Results_published")
+    if not os.path.exists("results_published"):
+        print("\n  WARNING: results_published/ not found. Back up the original")
+        print("  pickles before running anything that writes to results/:")
+        print("      Copy-Item -Recurse results results_published")
         print("  Continuing in 10s — Ctrl+C to stop.")
         try:
             time.sleep(10)
@@ -232,7 +232,7 @@ def main():
 
     print("\nIn the morning:")
     print("  python verify_reproduction.py --device cuda --report rerun_report.json")
-    print("  python -c \"import pickle;d=pickle.load(open('Results/2b_checkpoint.pkl','rb'));"
+    print("  python -c \"import pickle;d=pickle.load(open('results/2b_checkpoint.pkl','rb'));"
           "print({k:v[2] for k,v in d.items()})\"")
     print("\nThen compare serotype-only against published PHL-RBP+S:")
     print("  [0.817, 0.747, 0.690, 0.644, 0.636, 0.615, 0.659, 0.672]")

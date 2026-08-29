@@ -43,9 +43,11 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 MODEL_PATH = os.path.join(OUT_DIR, "stage4_model.pkl")
 RBP_TAGGED = os.path.join(OUT_DIR, "stage3_rbps_tagged.csv")
 RBP_EMB = os.path.join(OUT_DIR, "stage3_rbp_embeddings.npy")
@@ -59,7 +61,7 @@ RNG_SEED = 42
 # ---------------------------------------------------------------------------
 
 def build_training_serotype_vocab():
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
     df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
     one_hot = pd.get_dummies(df_sero["Best match type"], prefix="sero_")
     sero_encoded = pd.concat([df_sero[["Assembly"]], one_hot], axis=1)
@@ -126,7 +128,7 @@ def train_model():
 def build_locus_crosswalk():
     """kaptive_results.tsv's own (Best match locus -> Best match type)
     mapping, resolving the 5 ambiguous loci to their majority type."""
-    df = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+    df = pd.read_csv("data/kaptive_results.tsv", sep="\t")
     counts = df.groupby(["Best match locus", "Best match type"]).size()
     crosswalk = {}
     ambiguous_report = []
@@ -145,10 +147,10 @@ def load_klebphacol_hosts():
     literal space (e.g. "164413U/2 (aka 164413U12)") that would silently
     fail to join against interactions_LB_strict.csv's "164413U12", turning
     those 3 hosts' pairs into unscored, dropped rows rather than an error.
-    Uses Data/klebphacol/strain_aliases.csv's s4_name (the same canonical
+    Uses data/klebphacol/strain_aliases.csv's s4_name (the same canonical
     name Stage 1 committed and asserted bijective against Table S1)."""
     import pyxlsb
-    with pyxlsb.open_workbook("Data/klebphacol/Supplementary_Tables_R2.xlsb") as wb:
+    with pyxlsb.open_workbook("data/klebphacol/Supplementary_Tables_R2.xlsb") as wb:
         with wb.get_sheet("Table S1") as sheet:
             rows = list(sheet.rows())
     header = [c.v for c in rows[2]]
@@ -165,7 +167,7 @@ def load_klebphacol_hosts():
         out.append((name, v[idx_kl]))
     raw = pd.DataFrame(out, columns=["s1_name", "kl_locus"])
 
-    aliases = pd.read_csv("Data/klebphacol/strain_aliases.csv")
+    aliases = pd.read_csv("data/klebphacol/strain_aliases.csv")
     merged = raw.merge(aliases[["s4_name", "s1_name"]], on="s1_name", how="left")
     assert merged.s4_name.notna().all(), \
         f"{merged.s1_name[merged.s4_name.isna()].tolist()} not found in strain_aliases.csv"

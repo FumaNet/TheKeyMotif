@@ -27,7 +27,7 @@ in minutes rather than hours.
     python 2b_serotype_only.py
     $env:KM_THRESHOLDS="100,90"; python 2b_serotype_only.py
 
-Writes Results/2b_AUCs_serotype_only.pkl in the standard format.
+Writes results/2b_AUCs_serotype_only.pkl in the standard format.
 """
 
 import os
@@ -40,6 +40,8 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")
@@ -52,8 +54,8 @@ GROUPING_FILES = [
     "grouping/grouping_900.pkl", "grouping/grouping_850.pkl",
     "grouping/grouping_800.pkl", "grouping/grouping_750.pkl",
 ]
-OUT = "Results/2b_AUCs_serotype_only.pkl"
-CKPT = "Results/2b_checkpoint.pkl"
+OUT = "results/2b_AUCs_serotype_only.pkl"
+CKPT = "results/2b_checkpoint.pkl"
 ONLY = os.environ.get("KM_THRESHOLDS")
 
 
@@ -67,7 +69,7 @@ def main():
     print(f"Interaction-level table: {len(interactions):,} pairs "
           f"({100 * interactions['label'].mean():.2f}% positive)")
 
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
     df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
     one_hot = pd.get_dummies(df_sero["Best match type"], prefix="sero_")
     sero_encoded = pd.concat([df_sero[["Assembly"]], one_hot], axis=1)
@@ -75,7 +77,7 @@ def main():
     print(f"Serotype encoding: {len(sero_cols)} columns "
           f"(the ONLY features this model sees)")
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     done = pickle.load(open(CKPT, "rb")) if os.path.exists(CKPT) else {}
     if done:
         print(f"Checkpoint found — already complete: {sorted(done)}")

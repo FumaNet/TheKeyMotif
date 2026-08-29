@@ -6,7 +6,7 @@ WHY
 ---
 Every script begins by merging host-protein embeddings and phage RBP embeddings
 into one wide DataFrame, then caching it as
-`Data/combined_embeddings_per_protein.csv`. On the real dataset that frame is
+`data/combined_embeddings_per_protein.csv`. On the real dataset that frame is
 
     487,400 rows x 2,560 float columns
 
@@ -46,7 +46,7 @@ import os
 import numpy as np
 import pandas as pd
 
-DATA = "Data"
+DATA = "data"
 CACHE_DIR = os.path.join(DATA, "cache")
 HOST_NPY = os.path.join(CACHE_DIR, "host_emb.npy")
 VIRUS_NPY = os.path.join(CACHE_DIR, "virus_emb.npy")

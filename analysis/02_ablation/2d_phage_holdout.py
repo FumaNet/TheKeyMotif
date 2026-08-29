@@ -43,7 +43,7 @@ threshold. Report both; the gap between them is informative.
     python 2d_phage_holdout.py
     python 2d_phage_holdout.py --cluster-rbp
 
-Writes Results/2d_phage_holdout[_clustered].pkl as a single
+Writes results/2d_phage_holdout[_clustered].pkl as a single
 (labels, scores, auc) tuple -- NOT the 8-threshold list format, since there is
 only one split. verify_reproduction.py will skip it; read it directly.
 """
@@ -59,12 +59,14 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")
 
 
-def cluster_phages_by_rbp(rbp_csv="Data/RBPbase.csv"):
+def cluster_phages_by_rbp(rbp_csv="data/RBPbase.csv"):
     """
     Union-find: phages sharing an identical RBP sequence land in one group.
 
@@ -126,7 +128,7 @@ def cluster_phages_by_rbp(rbp_csv="Data/RBPbase.csv"):
     return {ph: labels[r] for ph, r in groups.items()}
 
 
-def cluster_phages_by_identity(threshold, rbp_csv="Data/RBPbase.csv"):
+def cluster_phages_by_identity(threshold, rbp_csv="data/RBPbase.csv"):
     """
     Merge phages whose RBPs exceed a sequence-identity threshold.
 
@@ -227,7 +229,7 @@ def main():
     else:
         tag = ""
     tag += "_noserotype" if args.no_serotype else ""
-    OUT = f"Results/2d_phage_holdout{tag}.pkl"
+    OUT = f"results/2d_phage_holdout{tag}.pkl"
 
     pairs, host_emb, virus_emb = kd.load()
 
@@ -265,7 +267,7 @@ def main():
 
     sero_encoded = sero_cols = None
     if not args.no_serotype:
-        df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+        df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
         df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
         one_hot = pd.get_dummies(df_sero["Best match type"], prefix="sero_")
         sero_encoded = pd.concat([df_sero[["Assembly"]], one_hot], axis=1)
@@ -347,7 +349,7 @@ def main():
     rauclr = round(auc(fpr, tpr), 3)
     pr = auc(rec, prec)
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     with open(OUT, "wb") as fh:
         pickle.dump((label_max, scores_max, rauclr), fh)
 

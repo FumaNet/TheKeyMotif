@@ -11,10 +11,10 @@ import os.path
 predsss = []
 
 # === LOAD MAIN DATASET ===
-if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
-    embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
-    embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
-    phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
+if not os.path.isfile('data/combined_embeddings_per_protein.csv'):
+    embeddings_loci_protein = pd.read_csv("data/esm2_embeddings_loci_per_protein.csv")
+    embeddings_rbp = pd.read_csv("data/esm2_embeddings_rbp.csv")
+    phage_host_interactions = pd.read_csv('data/phage_host_interactions.csv')
 
     interactions_melted = phage_host_interactions.melt(
         id_vars=['Unnamed: 0'], var_name='phage_ID', value_name='label'
@@ -40,15 +40,15 @@ if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
         merged[['label']]
     ], axis=1)
 
-    final_df.to_csv('Data/combined_embeddings_per_protein.csv', index=False)
+    final_df.to_csv('data/combined_embeddings_per_protein.csv', index=False)
 else:
-    final_df = pd.read_csv('Data/combined_embeddings_per_protein.csv', dtype={'accession': str})
+    final_df = pd.read_csv('data/combined_embeddings_per_protein.csv', dtype={'accession': str})
 
 # === LOAD ADDITIONAL DATA ===
-df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
 df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
 
-df_motifs = pd.read_csv("Data/full_onehost_found.csv")
+df_motifs = pd.read_csv("data/full_onehost_found.csv")
 
 with open("grouping/grouping_900.pkl", 'rb') as f:
     groups_dictionary = pickle.load(f)
@@ -199,5 +199,5 @@ else:
         pass
   
 # === SAVE ALL RESULTS ===
-with open('Results/5_AUCs_motif_focus.pkl', 'wb') as f:
+with open('results/5_AUCs_motif_focus.pkl', 'wb') as f:
     pickle.dump(predsss, f)

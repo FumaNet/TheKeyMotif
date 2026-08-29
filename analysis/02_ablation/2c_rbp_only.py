@@ -34,7 +34,7 @@ Stated explicitly so the difference is not mistaken for an error.
 
     python 2c_rbp_only.py
 
-Writes Results/2c_AUCs_rbp_only.pkl in the standard format.
+Writes results/2c_AUCs_rbp_only.pkl in the standard format.
 """
 
 import os
@@ -47,6 +47,8 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")
@@ -59,8 +61,8 @@ GROUPING_FILES = [
     "grouping/grouping_900.pkl", "grouping/grouping_850.pkl",
     "grouping/grouping_800.pkl", "grouping/grouping_750.pkl",
 ]
-OUT = "Results/2c_AUCs_rbp_only.pkl"
-CKPT = "Results/2c_checkpoint.pkl"
+OUT = "results/2c_AUCs_rbp_only.pkl"
+CKPT = "results/2c_checkpoint.pkl"
 ONLY = os.environ.get("KM_THRESHOLDS")
 
 
@@ -74,7 +76,7 @@ def main():
           f"(deduplicated from {len(pairs):,}; see docstring)")
     print("Features: RBP embedding ONLY — no host information of any kind.")
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     done = pickle.load(open(CKPT, "rb")) if os.path.exists(CKPT) else {}
     if done:
         print(f"Checkpoint found — already complete: {sorted(done)}")

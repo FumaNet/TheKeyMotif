@@ -33,10 +33,12 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 import klebphacol_stage4_train_predict as s4
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 
 
 def training_positive_serotypes_by_phage():
@@ -45,7 +47,7 @@ def training_positive_serotypes_by_phage():
     the ground truth, so this is the serotype set the phage-as-a-whole was
     positively associated with in training)."""
     pairs, _, _ = kd.load()
-    kaptive = pd.read_csv("Data/kaptive_results.tsv", sep="\t")[["Assembly", "Best match type"]]
+    kaptive = pd.read_csv("data/kaptive_results.tsv", sep="\t")[["Assembly", "Best match type"]]
     acc_to_type = dict(zip(kaptive.Assembly, kaptive["Best match type"]))
 
     pos = pairs[pairs.label == 1][["phage_ID", "accession"]].drop_duplicates()

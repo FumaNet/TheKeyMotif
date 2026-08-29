@@ -11,12 +11,12 @@ import os.path
 predsss = []
 max_score_pairs = []
 
-if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
+if not os.path.isfile('data/combined_embeddings_per_protein.csv'):
     print("Loading and preparing data from scratch...")
 
-    embeddings_loci_protein = pd.read_csv("Data/esm2_embeddings_loci_per_protein.csv")
-    embeddings_rbp = pd.read_csv("Data/esm2_embeddings_rbp.csv")
-    phage_host_interactions = pd.read_csv('Data/phage_host_interactions.csv')
+    embeddings_loci_protein = pd.read_csv("data/esm2_embeddings_loci_per_protein.csv")
+    embeddings_rbp = pd.read_csv("data/esm2_embeddings_rbp.csv")
+    phage_host_interactions = pd.read_csv('data/phage_host_interactions.csv')
 
     interactions_melted = phage_host_interactions.melt(
         id_vars=['Unnamed: 0'], var_name='phage_ID', value_name='label'
@@ -43,14 +43,14 @@ if not os.path.isfile('Data/combined_embeddings_per_protein.csv'):
         merged[['label']]
     ], axis=1)
 
-    final_df.to_csv('Data/combined_embeddings_per_protein.csv', index=False)
+    final_df.to_csv('data/combined_embeddings_per_protein.csv', index=False)
     print("Final per-protein dataframe saved as 'combined_embeddings_per_protein.csv'.")
 
 else:
     print("Loading from existing 'combined_embeddings_per_protein.csv' file.")
-    final_df = pd.read_csv('Data/combined_embeddings_per_protein.csv',
+    final_df = pd.read_csv('data/combined_embeddings_per_protein.csv',
     dtype={'accession': str})
-    print("Data loaded successfully.")
+    print("data loaded successfully.")
 
 thresholds = [1.0, 0.995, 0.99, 0.95, 0.9, 0.85, 0.8, 0.75]
 tstr = ['100', '99.5', '99', '95', '90', '85', '80', '75']
@@ -141,11 +141,11 @@ for i, threshold in enumerate(thresholds):
     else:
         print(f"Final evaluation failed at {tstr[i]}% threshold due to single-class predictions.")
 
-file_path = 'Results/1_AUCs_max_max.pkl'
+file_path = 'results/1_AUCs_max_max.pkl'
 
 with open(file_path, 'wb') as f:
     pickle.dump(predsss, f)
 
 # max_score_df = pd.concat(max_score_pairs, ignore_index=True)
-# max_score_df.to_csv('Results/max_score_protein_pairs.csv', index=False)
+# max_score_df.to_csv('results/max_score_protein_pairs.csv', index=False)
 # print("Max score protein-pair details saved as 'max_score_protein_pairs.csv'.")

@@ -8,7 +8,7 @@ Two modes:
                 model script fits in your VRAM. Run this BEFORE committing to
                 a long run. Takes seconds.
 
-  (default)     Compare the ROC-AUCs in Results/*.pkl against the values
+  (default)     Compare the ROC-AUCs in results/*.pkl against the values
                 published in "Protein-level prediction of Klebsiella phage
                 adsorption identifies conserved receptor-binding motifs"
                 (bioRxiv 2026.05.21.726843).
@@ -74,7 +74,7 @@ SCRIPT_PROFILE = {
     "6b": ("PHL-Random", 1360, "undersamp", "relabelled control"),
 }
 
-CACHE = "Data/combined_embeddings_per_protein.csv"
+CACHE = "data/combined_embeddings_per_protein.csv"
 
 
 # --------------------------------------------------------------------------
@@ -389,7 +389,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--preflight", action="store_true",
                     help="Check CUDA/XGBoost and estimate VRAM per script, then exit.")
-    ap.add_argument("--results-dir", default="Results")
+    ap.add_argument("--results-dir", default="results")
     ap.add_argument("--device", choices=["cuda", "cpu"], default="cuda",
                     help="Device the rerun used. Sets the tolerance band.")
     ap.add_argument("--report", metavar="PATH", default=None,

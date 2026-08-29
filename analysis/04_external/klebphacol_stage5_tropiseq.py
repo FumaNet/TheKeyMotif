@@ -57,8 +57,8 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 
-OUT_DIR = "Results/klebphacol"
-TS_DIR = "Data/tropiseq"
+OUT_DIR = "results/klebphacol"
+TS_DIR = "data/tropiseq"
 TS_MODEL = f"{TS_DIR}/TropiSEQ_model"
 BLAST_DB = f"{TS_MODEL}/depolymerase_clusters_database/TropiSeq_0.85.db"
 QUERY_FASTA = f"{TS_DIR}/klebphacol_rbps_query.fasta"
@@ -128,7 +128,7 @@ def build_pair_scores(pred_kept, rbp_df):
     pred_kept["phage_ID"] = pred_kept.gene_ID.map(rbp_to_phage)
 
     import pyxlsb
-    with pyxlsb.open_workbook("Data/klebphacol/Supplementary_Tables_R2.xlsb") as wb:
+    with pyxlsb.open_workbook("data/klebphacol/Supplementary_Tables_R2.xlsb") as wb:
         with wb.get_sheet("Table S1") as sheet:
             rows = list(sheet.rows())
     header = [c.v for c in rows[2]]
@@ -143,7 +143,7 @@ def build_pair_scores(pred_kept, rbp_df):
         if isinstance(name, float) and name.is_integer():
             name = str(int(name))
         host_kl[name] = v[idx_kl]
-    aliases = pd.read_csv("Data/klebphacol/strain_aliases.csv")
+    aliases = pd.read_csv("data/klebphacol/strain_aliases.csv")
     s1_to_s4 = dict(zip(aliases.s1_name, aliases.s4_name))
     host_kl = {s1_to_s4.get(k, k): v for k, v in host_kl.items()}
 

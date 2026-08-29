@@ -65,6 +65,8 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")
@@ -78,7 +80,7 @@ GROUPING_FILES = [
 ]
 
 
-def load_rbp_sequences(path="Data/RBPbase.csv"):
+def load_rbp_sequences(path="data/RBPbase.csv"):
     if not os.path.exists(path):
         raise SystemExit(f"Need {path} (RBP sequences) for --rule longest/central.")
     rbp = pd.read_csv(path)
@@ -154,13 +156,13 @@ def main():
                     help="Comma-separated subset, e.g. 100,90")
     args = ap.parse_args()
 
-    OUT = f"Results/5b_AUCs_consistency_{args.rule}.pkl"
-    CKPT = f"Results/5b_checkpoint_{args.rule}.pkl"
+    OUT = f"results/5b_AUCs_consistency_{args.rule}.pkl"
+    CKPT = f"results/5b_checkpoint_{args.rule}.pkl"
 
     pairs, host_emb, virus_emb = kd.load()
     rbp = load_rbp_sequences()
 
-    df_sero = pd.read_csv("Data/kaptive_results.tsv", sep="\t")
+    df_sero = pd.read_csv("data/kaptive_results.tsv", sep="\t")
     df_sero = df_sero[["Assembly", "Best match type", "Match confidence"]]
     sero_map = dict(zip(df_sero["Assembly"].astype(str),
                         df_sero["Best match type"]))
@@ -183,7 +185,7 @@ def main():
                                row["phage_ID"])) == row["protein_ID"]
         return chosen.get(row["phage_ID"]) == row["protein_ID"]
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     done = pickle.load(open(CKPT, "rb")) if os.path.exists(CKPT) else {}
     wanted = ({t.strip() for t in args.thresholds.split(",")}
               if args.thresholds else set(TSTR))

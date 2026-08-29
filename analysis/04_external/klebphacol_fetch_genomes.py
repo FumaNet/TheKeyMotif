@@ -30,9 +30,9 @@ import time
 import subprocess
 import pyxlsb
 
-XLSB_PATH = "Data/klebphacol/Supplementary_Tables_R2.xlsb"
-PHAGE_OUT_DIR = "Data/genomes/klebphacol_phages"
-HOST_OUT_DIR = "Data/genomes/klebphacol_hosts"
+XLSB_PATH = "data/klebphacol/Supplementary_Tables_R2.xlsb"
+PHAGE_OUT_DIR = "data/genomes/klebphacol_phages"
+HOST_OUT_DIR = "data/genomes/klebphacol_hosts"
 NCBI_EMAIL = "fumanet@outlook.com"
 DATASETS = ["conda", "run", "-n", "genomics", "datasets"]
 

@@ -32,11 +32,13 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 import klebphacol_stage4_train_predict as s4
 import klebphacol_stage5_tropiseq as s5
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 INTERACTION_FILES = {
     "LB strict": f"{OUT_DIR}/interactions_LB_strict.csv",
     "LB permissive": f"{OUT_DIR}/interactions_LB_permissive.csv",

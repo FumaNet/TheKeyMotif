@@ -29,14 +29,18 @@ notably the near-identical stratum, where all 34 RBPs match one of two training
 phages.
 """
 
+import os
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+
 # ----------------------------------------------------------------------------
 # CONFIG -- edit to match your predictions file
 # ----------------------------------------------------------------------------
-INFILE = "klebphacol_predictions.csv"
+INFILE = os.path.join(HERE, "klebphacol_predictions.csv")
 COL = dict(medium="medium", mapping="mapping", stratum="stratum",
            y_true="y_true", score="score", host_seen="host_seen", phage="phage")
 N_BOOT = 2000
@@ -110,7 +114,7 @@ def main():
                         n_phages=t[COL["phage"]].nunique()))
 
     out = pd.DataFrame(rows)
-    out.to_csv("S4_appendix_table.csv", index=False)
+    out.to_csv(os.path.join(HERE, "S4_appendix_table.csv"), index=False)
     print(out.to_string(index=False))
 
     def ci(lo, hi):
@@ -133,7 +137,7 @@ def main():
             f"{r.lift:.2f} \\\\")
     lines += [r"\hline", r"\end{tabular}", r"\label{tab:s4_sensitivity}",
                 r"\end{table}"]
-    open("S4_appendix_table.tex", "w").write("\n".join(lines) + "\n")
+    open(os.path.join(HERE, "S4_appendix_table.tex"), "w").write("\n".join(lines) + "\n")
     print("\nwrote S4_appendix_table.csv and S4_appendix_table.tex")
 
 

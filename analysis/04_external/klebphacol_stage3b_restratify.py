@@ -21,9 +21,9 @@ import pandas as pd
 from rapidfuzz.distance import Levenshtein
 from rapidfuzz import process
 
-RBP_TAGGED = "Results/klebphacol/stage3_rbps_tagged.csv"
-RBPBASE_PATH = "Data/RBPbase.csv"
-EXCLUSIONS = "Results/klebphacol/overlap_exclusions.csv"
+RBP_TAGGED = "results/klebphacol/stage3_rbps_tagged.csv"
+RBPBASE_PATH = "data/RBPbase.csv"
+EXCLUSIONS = "results/klebphacol/overlap_exclusions.csv"
 
 
 def stratum(x):

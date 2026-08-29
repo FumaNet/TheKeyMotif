@@ -31,9 +31,9 @@ import numpy as np
 from rapidfuzz.distance import Levenshtein
 from rapidfuzz import process
 
-XLSB_PATH = "Data/klebphacol/Supplementary_Tables_R2.xlsb"
-RBPBASE_PATH = "Data/RBPbase.csv"
-OUT_DIR = "Results/klebphacol"
+XLSB_PATH = "data/klebphacol/Supplementary_Tables_R2.xlsb"
+RBPBASE_PATH = "data/RBPbase.csv"
+OUT_DIR = "results/klebphacol"
 MIN_LEN, MAX_LEN = 200, 1500
 SCORE_THRESH = 0.5
 

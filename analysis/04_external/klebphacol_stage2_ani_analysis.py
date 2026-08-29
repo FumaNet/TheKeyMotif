@@ -15,7 +15,7 @@ For hosts, KlebPhaCol strains split into two groups with different
 provenance: 69 resolved directly from a Table S1 accession, and 5
 (NCTC_13368, ATCC_11296, NCTC_13438, NCTC_7427, NCTC_13443) resolved by
 searching NCBI on strain name because Table S1 gives no accession for them
-at all (see Results/klebphacol/host_accessions_resolved.csv). Distributions
+at all (see results/klebphacol/host_accessions_resolved.csv). Distributions
 are reported separately for these two groups so a name-resolution error
 can't be mistaken for a real cross-collection overlap finding.
 
@@ -107,15 +107,15 @@ def main():
     print("STAGE 2 CHECKPOINT: fastANI overlap")
     print("=" * 66)
 
-    ani_phage = load_ani("Results/klebphacol/ani_phages_raw.txt")
+    ani_phage = load_ani("results/klebphacol/ani_phages_raw.txt")
     phage_best = best_hits(ani_phage, kp_phage_ids)
     report_distribution("PHAGES: KlebPhaCol (n=52) best hit among Boeckaerts (n=105)",
                          phage_best)
 
-    ani_host = load_ani("Results/klebphacol/ani_hosts_raw.txt")
+    ani_host = load_ani("results/klebphacol/ani_hosts_raw.txt")
     host_best = best_hits(ani_host, kp_host_ids)
 
-    resolved = pd.read_csv("Results/klebphacol/host_accessions_resolved.csv")
+    resolved = pd.read_csv("results/klebphacol/host_accessions_resolved.csv")
     name_based_strains = set(resolved.strain)
     host_best["resolution"] = np.where(host_best.query_id.isin(name_based_strains),
                                         "name-based", "table-resolved")
@@ -140,7 +140,7 @@ def main():
         res_map = host_best.set_index("query_id")["resolution"].to_dict()
         excl_df["host_resolution"] = excl_df.apply(
             lambda r: res_map.get(r.klebphacol_id, "") if r.side == "host" else "", axis=1)
-    out_path = "Results/klebphacol/overlap_exclusions.csv"
+    out_path = "results/klebphacol/overlap_exclusions.csv"
     excl_df.to_csv(out_path, index=False)
     print(f"\nWrote {out_path} ({len(excl_df)} rows)")
     if len(excl_df):

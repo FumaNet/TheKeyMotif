@@ -9,7 +9,7 @@ Run from the repo root, with keymotif_data.py alongside it:
 
     python 0_original_replica_compact.py
 
-Writes Results/0_AUCs_original_replica.pkl in the original format:
+Writes results/0_AUCs_original_replica.pkl in the original format:
 a list of (labels, scores, rounded_roc_auc) tuples, one per threshold.
 
 Verified bit-identical to the original by test_equivalence.py.
@@ -25,6 +25,8 @@ from sklearn.model_selection import LeaveOneGroupOut
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
+import os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "src"))
 import keymotif_data as kd
 
 DEVICE = os.environ.get("KM_DEVICE", "cuda")   # set KM_DEVICE=cpu to fall back
@@ -41,8 +43,8 @@ GROUPING_FILES = [
     "grouping/grouping_800.pkl",
     "grouping/grouping_750.pkl",
 ]
-OUT = "Results/0_AUCs_original_replica.pkl"
-CKPT = "Results/0_checkpoint.pkl"
+OUT = "results/0_AUCs_original_replica.pkl"
+CKPT = "results/0_checkpoint.pkl"
 ONLY = os.environ.get("KM_THRESHOLDS")   # e.g. "95,90,85,80,75"
 
 
@@ -52,7 +54,7 @@ def main():
     # block. `pairs` is the row index; the embeddings stay in two small arrays.
     pairs, host_emb, virus_emb = kd.load()
 
-    os.makedirs("Results", exist_ok=True)
+    os.makedirs("results", exist_ok=True)
     done = pickle.load(open(CKPT, "rb")) if os.path.exists(CKPT) else {}
     if done:
         print(f"Checkpoint found — already complete: {sorted(done)}")

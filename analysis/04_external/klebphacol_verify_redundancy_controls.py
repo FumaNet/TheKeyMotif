@@ -22,7 +22,7 @@ import pandas as pd
 from rapidfuzz.distance import Levenshtein
 from rapidfuzz import process
 
-OUT_DIR = "Results/klebphacol"
+OUT_DIR = "results/klebphacol"
 
 
 def genome_ani_argmax_exclusions():
@@ -44,7 +44,7 @@ def genome_ani_argmax_exclusions():
 def main():
     targets = ["K7PH164C4", "K2064PH2", "K30lambda2", "K40PH129C1", "K52PH129C1"]
     rbps_kp = pd.read_csv(f"{OUT_DIR}/stage3_rbps_tagged.csv")
-    bk_all = pd.read_csv("Data/RBPbase.csv")
+    bk_all = pd.read_csv("data/RBPbase.csv")
     excl = pd.read_csv(f"{OUT_DIR}/overlap_exclusions.csv")
     excluded_7 = set(excl.boeckaerts_phage_to_exclude.unique())
     genome_excl_set, genome_best = genome_ani_argmax_exclusions()

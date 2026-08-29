@@ -38,25 +38,25 @@ STEPS = [
     # (id, label, argv, output file that marks completion)
     ("2d-100", "phage split @ 100% identity",
      ["2d_phage_holdout.py", "--cluster-identity", "1.00", "--dedup"],
-     "Results/2d_phage_holdout_id100.pkl"),
+     "results/2d_phage_holdout_id100.pkl"),
     ("2d-95", "phage split @ 95% identity",
      ["2d_phage_holdout.py", "--cluster-identity", "0.95", "--dedup"],
-     "Results/2d_phage_holdout_id95.pkl"),
+     "results/2d_phage_holdout_id95.pkl"),
     ("2d-90", "phage split @ 90% identity",
      ["2d_phage_holdout.py", "--cluster-identity", "0.90", "--dedup"],
-     "Results/2d_phage_holdout_id90.pkl"),
+     "results/2d_phage_holdout_id90.pkl"),
     ("2d-80", "phage split @ 80% identity",
      ["2d_phage_holdout.py", "--cluster-identity", "0.80", "--dedup"],
-     "Results/2d_phage_holdout_id80.pkl"),
+     "results/2d_phage_holdout_id80.pkl"),
     ("5b-central", "consistency control: central",
      ["5b_consistency_control.py", "--rule", "central"],
-     "Results/5b_AUCs_consistency_central.pkl"),
+     "results/5b_AUCs_consistency_central.pkl"),
     ("5b-longest", "consistency control: longest",
      ["5b_consistency_control.py", "--rule", "longest"],
-     "Results/5b_AUCs_consistency_longest.pkl"),
+     "results/5b_AUCs_consistency_longest.pkl"),
     ("5b-first", "consistency control: first",
      ["5b_consistency_control.py", "--rule", "first"],
-     "Results/5b_AUCs_consistency_first.pkl"),
+     "results/5b_AUCs_consistency_first.pkl"),
 ]
 
 PUBLISHED = {
@@ -108,7 +108,7 @@ def collate():
     print(f"{'RBP identity':<16}{'ROC-AUC':>10}{'PR-AUC':>10}")
     any_id = False
     for pct in ["100", "95", "90", "80"]:
-        f = f"Results/2d_phage_holdout_id{pct}.pkl"
+        f = f"results/2d_phage_holdout_id{pct}.pkl"
         if not os.path.exists(f):
             print(f"{pct + '%':<16}{'—':>10}{'—':>10}")
             continue
@@ -133,7 +133,7 @@ def collate():
     print(f"{'PHL-Random':<22}{0.545:>7.3f}  (best across thresholds)")
     print("-" * len(hdr))
     for rule in ["central", "longest", "first"]:
-        f = f"Results/5b_AUCs_consistency_{rule}.pkl"
+        f = f"results/5b_AUCs_consistency_{rule}.pkl"
         if not os.path.exists(f):
             print(f"{rule:<22}" + "".join(f"{'—':>7}" for _ in TSTR))
             continue

@@ -25,7 +25,7 @@ WGS-master, i.e. also draft) accessions used for the other 69 hosts.
 import os
 import pandas as pd
 
-OUT_PATH = "Results/klebphacol/host_accessions_resolved.csv"
+OUT_PATH = "results/klebphacol/host_accessions_resolved.csv"
 
 ROWS = [
     dict(strain="NCTC_7427", accession="GCF_983172345.1",
