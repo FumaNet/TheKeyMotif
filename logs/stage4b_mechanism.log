@@ -1,0 +1,85 @@
+34 near-identical KlebPhaCol RBPs across 22 phages
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+  Roth08: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth09: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth10: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth24: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth30: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth37: near-identical RBP(s) matched to ['K7PH164C4'] -> positive training serotypes ['Capsule null', 'K11', 'K13', 'K14', 'K26', 'K29', 'K30', 'K31', 'K35', 'K36', 'K46', 'K47', 'K54', 'K57', 'K60', 'K64', 'K65', 'K68', 'K8']
+  Roth39: near-identical RBP(s) matched to ['K7PH164C4'] -> positive training serotypes ['Capsule null', 'K11', 'K13', 'K14', 'K26', 'K29', 'K30', 'K31', 'K35', 'K36', 'K46', 'K47', 'K54', 'K57', 'K60', 'K64', 'K65', 'K68', 'K8']
+  Roth42: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth47: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth49: near-identical RBP(s) matched to ['K7PH164C4'] -> positive training serotypes ['Capsule null', 'K11', 'K13', 'K14', 'K26', 'K29', 'K30', 'K31', 'K35', 'K36', 'K46', 'K47', 'K54', 'K57', 'K60', 'K64', 'K65', 'K68', 'K8']
+  Roth50: near-identical RBP(s) matched to ['K7PH164C4'] -> positive training serotypes ['Capsule null', 'K11', 'K13', 'K14', 'K26', 'K29', 'K30', 'K31', 'K35', 'K36', 'K46', 'K47', 'K54', 'K57', 'K60', 'K64', 'K65', 'K68', 'K8']
+  Roth61: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth71: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth72: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth74: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth75: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth83: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth84: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth85: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth87: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth93: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+  Roth96: near-identical RBP(s) matched to ['K2069PH1'] -> positive training serotypes ['Capsule null', 'K19', 'K33', 'K35', 'K64']
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+
+==================================================================
+MATCHED vs MISMATCHED split, per interaction table
+==================================================================
+
+--- LB strict ---
+  [primary, excl 346 no-valid-serotype rows] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [primary, excl 346 no-valid-serotype rows] MISMATCHED  n= 1250 n_pos= 144 base_rate=11.5% lift=1.12x ROC-AUC=0.434 PR-AUC=0.107
+  [incl unseen-KL hosts folded into MISMATCHED] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [incl unseen-KL hosts folded into MISMATCHED] MISMATCHED  n= 1596 n_pos= 166 base_rate=10.4% lift=1.01x ROC-AUC=0.408 PR-AUC=0.086
+
+--- LB permissive ---
+  [primary, excl 352 no-valid-serotype rows] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [primary, excl 352 no-valid-serotype rows] MISMATCHED  n= 1256 n_pos= 150 base_rate=11.9% lift=1.09x ROC-AUC=0.436 PR-AUC=0.110
+  [incl unseen-KL hosts folded into MISMATCHED] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [incl unseen-KL hosts folded into MISMATCHED] MISMATCHED  n= 1608 n_pos= 178 base_rate=11.1% lift=1.01x ROC-AUC=0.421 PR-AUC=0.094
+
+--- TSB strict ---
+  [primary, excl 345 no-valid-serotype rows] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [primary, excl 345 no-valid-serotype rows] MISMATCHED  n= 1247 n_pos= 163 base_rate=13.1% lift=1.09x ROC-AUC=0.502 PR-AUC=0.137
+  [incl unseen-KL hosts folded into MISMATCHED] MATCHED     n=   20 n_pos=   0 base_rate=0.0% lift=0.00x ROC-AUC=nan PR-AUC=nan
+  [incl unseen-KL hosts folded into MISMATCHED] MISMATCHED  n= 1592 n_pos= 194 base_rate=12.2% lift=1.01x ROC-AUC=0.467 PR-AUC=0.110
+
+==================================================================
+RAW COUNTS: cross-collection serotype reassignment
+==================================================================
+LB strict, all pairs: 1596/1616 near-identical pairs are MISMATCHED (98.8%)
+LB strict, POSITIVE pairs only: 166/166 are MISMATCHED (100.0%) -- i.e. this many real KlebPhaCol infections involve a near-identical RBP paired with a host serotype the matched training RBP was never positively associated with.
+
+Phages with >=1 positive KlebPhaCol interaction outside their matched training serotype set: 22/22 -> ['Roth08', 'Roth09', 'Roth10', 'Roth24', 'Roth30', 'Roth37', 'Roth39', 'Roth42', 'Roth47', 'Roth49', 'Roth50', 'Roth61', 'Roth71', 'Roth72', 'Roth74', 'Roth75', 'Roth83', 'Roth84', 'Roth85', 'Roth87', 'Roth93', 'Roth96']
+Distinct near-identical RBPs on those phages: 34/34
+This count stands regardless of how the MATCHED/MISMATCHED split's AUCs come out -- it is the direct evidence for or against RBP reuse across a different serotype between the two collections.

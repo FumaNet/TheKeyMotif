@@ -1,0 +1,118 @@
+
+======================================================================
+2026-08-23 04:45:09  2d_phage_holdout.py --cluster-identity 0.90 --dedup
+======================================================================
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+  rapidfuzz not installed; falling back to difflib (much slower)
+  pip install rapidfuzz
+  identity clustering at 90%: 105 phages -> 80 groups (25 merges, 274 RBPs compared)
+Phage clustering: 105 phages -> 80 groups (merged by 90% RBP identity)
+Deduplicated: 487,400 -> 25,120 rows (matches 2c_rbp_only.py weighting)
+Rows: 25,120   folds: 80
+Features: RBP embedding + 87 serotype columns (identical to PHL-RBP+S)
+Output: Results/2d_phage_holdout_id90.pkl
+
+phage-holdout CV:   0%|          | 0/80 [00:00<?, ?it/s]C:\Users\IamAh\anaconda3\envs\keymotif\Lib\site-packages\xgboost\core.py:158: UserWarning: [04:45:52] WARNING: C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-08cbc0333d8d4aae1-1\xgboost\xgboost-ci-windows\src\common\error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+
+phage-holdout CV:   1%|1         | 1/80 [00:11<14:39, 11.13s/it]
+phage-holdout CV:   2%|2         | 2/80 [00:22<14:24, 11.08s/it]
+phage-holdout CV:   4%|3         | 3/80 [00:33<14:12, 11.07s/it]
+phage-holdout CV:   5%|5         | 4/80 [00:44<14:05, 11.12s/it]
+phage-holdout CV:   6%|6         | 5/80 [00:55<13:53, 11.12s/it]
+phage-holdout CV:   8%|7         | 6/80 [01:07<13:58, 11.33s/it]
+phage-holdout CV:   9%|8         | 7/80 [01:19<14:16, 11.73s/it]
+phage-holdout CV:  10%|#         | 8/80 [01:30<13:48, 11.51s/it]
+phage-holdout CV:  11%|#1        | 9/80 [01:42<13:34, 11.47s/it]
+phage-holdout CV:  12%|#2        | 10/80 [01:54<13:43, 11.77s/it]
+phage-holdout CV:  14%|#3        | 11/80 [02:05<13:21, 11.61s/it]
+phage-holdout CV:  15%|#5        | 12/80 [02:17<12:58, 11.44s/it]
+phage-holdout CV:  16%|#6        | 13/80 [02:28<12:39, 11.34s/it]
+phage-holdout CV:  18%|#7        | 14/80 [02:39<12:24, 11.28s/it]
+phage-holdout CV:  19%|#8        | 15/80 [02:50<12:11, 11.26s/it]
+phage-holdout CV:  20%|##        | 16/80 [03:01<11:59, 11.25s/it]
+phage-holdout CV:  21%|##1       | 17/80 [03:12<11:48, 11.24s/it]
+phage-holdout CV:  22%|##2       | 18/80 [03:23<11:33, 11.18s/it]
+phage-holdout CV:  24%|##3       | 19/80 [03:35<11:22, 11.18s/it]
+phage-holdout CV:  25%|##5       | 20/80 [03:46<11:10, 11.18s/it]
+phage-holdout CV:  26%|##6       | 21/80 [03:57<11:01, 11.21s/it]
+phage-holdout CV:  28%|##7       | 22/80 [04:08<10:47, 11.17s/it]
+phage-holdout CV:  29%|##8       | 23/80 [04:19<10:37, 11.19s/it]
+phage-holdout CV:  30%|###       | 24/80 [04:31<10:35, 11.35s/it]
+phage-holdout CV:  31%|###1      | 25/80 [04:44<10:43, 11.70s/it]
+phage-holdout CV:  32%|###2      | 26/80 [04:55<10:23, 11.54s/it]
+phage-holdout CV:  34%|###3      | 27/80 [05:06<10:06, 11.44s/it]
+phage-holdout CV:  35%|###5      | 28/80 [05:17<09:53, 11.41s/it]
+phage-holdout CV:  36%|###6      | 29/80 [05:29<09:38, 11.34s/it]
+phage-holdout CV:  38%|###7      | 30/80 [05:40<09:21, 11.23s/it]
+phage-holdout CV:  39%|###8      | 31/80 [05:51<09:11, 11.26s/it]
+phage-holdout CV:  40%|####      | 32/80 [06:02<09:00, 11.26s/it]
+phage-holdout CV:  41%|####1     | 33/80 [06:13<08:47, 11.22s/it]
+phage-holdout CV:  42%|####2     | 34/80 [06:24<08:35, 11.21s/it]
+phage-holdout CV:  44%|####3     | 35/80 [06:36<08:23, 11.19s/it]
+phage-holdout CV:  45%|####5     | 36/80 [06:47<08:13, 11.20s/it]
+phage-holdout CV:  46%|####6     | 37/80 [06:58<08:02, 11.22s/it]
+phage-holdout CV:  48%|####7     | 38/80 [07:09<07:53, 11.27s/it]
+phage-holdout CV:  49%|####8     | 39/80 [07:21<07:39, 11.21s/it]
+phage-holdout CV:  50%|#####     | 40/80 [07:32<07:29, 11.23s/it]
+phage-holdout CV:  51%|#####1    | 41/80 [07:43<07:18, 11.25s/it]
+phage-holdout CV:  52%|#####2    | 42/80 [07:54<07:07, 11.25s/it]
+phage-holdout CV:  54%|#####3    | 43/80 [08:06<06:56, 11.25s/it]
+phage-holdout CV:  55%|#####5    | 44/80 [08:17<06:43, 11.22s/it]
+phage-holdout CV:  56%|#####6    | 45/80 [08:28<06:34, 11.28s/it]
+phage-holdout CV:  57%|#####7    | 46/80 [08:39<06:23, 11.27s/it]
+phage-holdout CV:  59%|#####8    | 47/80 [08:51<06:12, 11.29s/it]
+phage-holdout CV:  60%|######    | 48/80 [09:02<06:00, 11.26s/it]
+phage-holdout CV:  61%|######1   | 49/80 [09:13<05:49, 11.28s/it]
+phage-holdout CV:  62%|######2   | 50/80 [09:25<05:39, 11.32s/it]
+phage-holdout CV:  64%|######3   | 51/80 [09:36<05:26, 11.26s/it]
+phage-holdout CV:  65%|######5   | 52/80 [09:47<05:14, 11.22s/it]
+phage-holdout CV:  66%|######6   | 53/80 [09:58<05:03, 11.23s/it]
+phage-holdout CV:  68%|######7   | 54/80 [10:10<04:53, 11.29s/it]
+phage-holdout CV:  69%|######8   | 55/80 [10:21<04:41, 11.24s/it]
+phage-holdout CV:  70%|#######   | 56/80 [10:32<04:29, 11.23s/it]
+phage-holdout CV:  71%|#######1  | 57/80 [10:43<04:18, 11.23s/it]
+phage-holdout CV:  72%|#######2  | 58/80 [10:55<04:07, 11.27s/it]
+phage-holdout CV:  74%|#######3  | 59/80 [11:06<03:56, 11.26s/it]
+phage-holdout CV:  75%|#######5  | 60/80 [11:17<03:45, 11.27s/it]
+phage-holdout CV:  76%|#######6  | 61/80 [11:28<03:33, 11.25s/it]
+phage-holdout CV:  78%|#######7  | 62/80 [11:39<03:22, 11.24s/it]
+phage-holdout CV:  79%|#######8  | 63/80 [11:51<03:10, 11.22s/it]
+phage-holdout CV:  80%|########  | 64/80 [12:02<02:59, 11.20s/it]
+phage-holdout CV:  81%|########1 | 65/80 [12:13<02:47, 11.19s/it]
+phage-holdout CV:  82%|########2 | 66/80 [12:24<02:37, 11.23s/it]
+phage-holdout CV:  84%|########3 | 67/80 [12:36<02:26, 11.27s/it]
+phage-holdout CV:  85%|########5 | 68/80 [12:47<02:14, 11.24s/it]
+phage-holdout CV:  86%|########6 | 69/80 [12:58<02:03, 11.23s/it]
+phage-holdout CV:  88%|########7 | 70/80 [13:09<01:52, 11.26s/it]
+phage-holdout CV:  89%|########8 | 71/80 [13:21<01:41, 11.32s/it]
+phage-holdout CV:  90%|######### | 72/80 [13:32<01:30, 11.34s/it]
+phage-holdout CV:  91%|#########1| 73/80 [13:44<01:19, 11.34s/it]
+phage-holdout CV:  92%|#########2| 74/80 [13:55<01:07, 11.33s/it]
+phage-holdout CV:  94%|#########3| 75/80 [14:06<00:56, 11.30s/it]
+phage-holdout CV:  95%|#########5| 76/80 [14:17<00:45, 11.27s/it]
+phage-holdout CV:  96%|#########6| 77/80 [14:29<00:33, 11.28s/it]
+phage-holdout CV:  98%|#########7| 78/80 [14:40<00:22, 11.31s/it]
+phage-holdout CV:  99%|#########8| 79/80 [14:51<00:11, 11.28s/it]
+phage-holdout CV: 100%|##########| 80/80 [15:03<00:00, 11.30s/it]
+phage-holdout CV: 100%|##########| 80/80 [15:03<00:00, 11.29s/it]
+
+==============================================================
+PHAGE-HELD-OUT AUC: 0.731    PR-AUC: 0.222
+==============================================================
+  THE 2x2:                bacterial split   phage split
+    RBP + serotype              0.817          0.731
+    RBP only                    0.701              ?
+    serotype only               0.589              n/a
+  dataset positive rate:      0.033
+
+  -> Holds up. The model generalises to unseen phages, which
+     answers Reviewer #1's memorisation concern directly.
+
+  Wrote Results/2d_phage_holdout_id90.pkl

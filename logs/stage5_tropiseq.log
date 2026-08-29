@@ -1,0 +1,84 @@
+==================================================================
+STAGE 5: TropiSEQ BLASTp prediction
+==================================================================
+BLAST predictions: 24/187 RBPs pass bitscore>75 and coverage>0.8 (0 no-hit/below-threshold)
+
+FAIRNESS RULE (best-hit identity >= 95.0% -> 'already in TropiSEQ's own training data'):
+  0/24 predicted RBPs dropped
+
+Scored 23 phages x 74 hosts = 1702 pairs (phages with no surviving prediction score 0 everywhere)
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+
+==================================================================
+TropiSEQ RESULTS (same strata, same host-scope split as PHL-RBP+S)
+==================================================================
+
+  [LB strict]
+    -- including 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           3611    486      13.5%   1.00x     0.505     0.143
+    novel             1706    307      18.0%   1.34x     0.500     0.180
+    related            289     13       4.5%   0.33x     0.692     0.412
+    near-identical    1616    166      10.3%   0.76x     0.500     0.103
+    -- excluding 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           2842    370      13.0%   1.00x     0.507     0.142
+    novel             1347    215      16.0%   1.23x     0.500     0.160
+    related            225     11       4.9%   0.38x     0.727     0.481
+    near-identical    1270    144      11.3%   0.87x     0.500     0.113
+
+  [LB permissive]
+    -- including 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           3848    723      18.8%   1.00x     0.506     0.198
+    novel             1924    525      27.3%   1.45x     0.500     0.273
+    related            296     20       6.8%   0.36x     0.725     0.487
+    near-identical    1628    178      10.9%   0.58x     0.500     0.109
+    -- excluding 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           3016    544      18.0%   1.00x     0.508     0.194
+    novel             1508    376      24.9%   1.38x     0.500     0.249
+    related            232     18       7.8%   0.43x     0.750     0.539
+    near-identical    1276    150      11.8%   0.65x     0.500     0.118
+
+  [TSB strict]
+    -- including 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           3476    638      18.4%   1.00x     0.503     0.187
+    novel             1573    433      27.5%   1.50x     0.500     0.275
+    related            291     11       3.8%   0.21x     0.678     0.266
+    near-identical    1612    194      12.0%   0.66x     0.500     0.120
+    -- excluding 16 unseen-KL hosts --
+    stratum              n  n_pos  base_rate    lift   ROC-AUC    PR-AUC
+    overall           2728    498      18.3%   1.00x     0.504     0.186
+    novel             1234    325      26.3%   1.44x     0.500     0.263
+    related            227     10       4.4%   0.24x     0.695     0.293
+    near-identical    1267    163      12.9%   0.70x     0.500     0.129

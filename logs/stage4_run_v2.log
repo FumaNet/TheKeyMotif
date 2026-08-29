@@ -1,0 +1,185 @@
+Loaded cached model from Results/klebphacol/stage4_model.pkl
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+GUARD 1 (re-checked against cache): 98 Boeckaerts phages expected in training.
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+
+Phage-level stratum (post-exclusion, restratified): 26 novel / 4 related / 22 near-identical
+
+==================================================================
+PREDICTION: full RBP set (193 RBPs)
+==================================================================
+Scored 3848 (phage, host) combinations
+
+==================================================================
+SENSITIVITY: subsampled RBP set (top-3/phage by scores_RBPDetect)
+==================================================================
+31/52 phages have >3 RBPs and get subsampled (N=3 = round(274/105=2.610))
+
+==================================================================
+RESULTS: LB strict
+==================================================================
+
+  [full RBP set]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3611     486      13.5%     0.548     0.155
+    novel               1706     307      18.0%     0.647     0.271
+    related              289      13       4.5%     0.351     0.039
+    near-identical      1616     166      10.3%     0.403     0.083
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             2842     370      13.0%     0.558     0.182
+    novel               1347     215      16.0%     0.649     0.279
+    related              225      11       4.9%     0.318     0.038
+    near-identical      1270     144      11.3%     0.426     0.101
+
+  [subsampled top-3/phage]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3611     486      13.5%     0.537     0.152
+    novel               1706     307      18.0%     0.631     0.264
+    related              289      13       4.5%     0.351     0.039
+    near-identical      1616     166      10.3%     0.405     0.084
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             2842     370      13.0%     0.541     0.172
+    novel               1347     215      16.0%     0.623     0.257
+    related              225      11       4.9%     0.318     0.038
+    near-identical      1270     144      11.3%     0.430     0.102
+
+  Sensitivity delta (full -> subsampled), novel stratum, excl_unseen_kl scope (the honest external number):
+    ROC-AUC: 0.649 -> 0.623  (delta -0.026)
+    PR-AUC:  0.279 -> 0.257  (delta -0.022)
+    -> metrics move materially; report the subsampled version as primary
+
+==================================================================
+RESULTS: LB permissive
+==================================================================
+
+  [full RBP set]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3848     723      18.8%     0.548     0.219
+    novel               1924     525      27.3%     0.618     0.369
+    related              296      20       6.8%     0.281     0.050
+    near-identical      1628     178      10.9%     0.416     0.091
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3016     544      18.0%     0.545     0.237
+    novel               1508     376      24.9%     0.604     0.355
+    related              232      18       7.8%     0.269     0.056
+    near-identical      1276     150      11.8%     0.428     0.105
+
+  [subsampled top-3/phage]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3848     723      18.8%     0.542     0.216
+    novel               1924     525      27.3%     0.611     0.365
+    related              296      20       6.8%     0.281     0.050
+    near-identical      1628     178      10.9%     0.418     0.091
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3016     544      18.0%     0.535     0.230
+    novel               1508     376      24.9%     0.593     0.342
+    related              232      18       7.8%     0.269     0.056
+    near-identical      1276     150      11.8%     0.431     0.106
+
+  Sensitivity delta (full -> subsampled), novel stratum, excl_unseen_kl scope (the honest external number):
+    ROC-AUC: 0.604 -> 0.593  (delta -0.011)
+    PR-AUC:  0.355 -> 0.342  (delta -0.013)
+    -> metrics barely move; the 1.42x RBP-count inflation is NOT driving results
+
+==================================================================
+RESULTS: TSB strict
+==================================================================
+
+  [full RBP set]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3476     638      18.4%     0.560     0.210
+    novel               1573     433      27.5%     0.629     0.367
+    related              291      11       3.8%     0.282     0.029
+    near-identical      1612     194      12.0%     0.460     0.107
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             2728     498      18.3%     0.592     0.266
+    novel               1234     325      26.3%     0.654     0.415
+    related              227      10       4.4%     0.277     0.032
+    near-identical      1267     163      12.9%     0.493     0.128
+
+  [subsampled top-3/phage]
+    -- including 16 unseen-KL hosts (deployment-realistic) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3476     638      18.4%     0.549     0.205
+    novel               1573     433      27.5%     0.613     0.357
+    related              291      11       3.8%     0.282     0.029
+    near-identical      1612     194      12.0%     0.463     0.108
+    -- excluding 16 unseen-KL hosts (model-as-designed) --
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             2728     498      18.3%     0.573     0.252
+    novel               1234     325      26.3%     0.628     0.389
+    related              227      10       4.4%     0.277     0.032
+    near-identical      1267     163      12.9%     0.498     0.130
+
+  Sensitivity delta (full -> subsampled), novel stratum, excl_unseen_kl scope (the honest external number):
+    ROC-AUC: 0.654 -> 0.628  (delta -0.026)
+    PR-AUC:  0.415 -> 0.389  (delta -0.026)
+    -> metrics move materially; report the subsampled version as primary
+
+==================================================================
+BOOTSTRAP 95% CI, novel stratum, full RBP set (n_boot=2000)
+==================================================================
+
+  [LB strict, incl 16 unseen-KL hosts] novel stratum: n=1706, n_pos=307
+    ROC-AUC 95% CI: [0.612, 0.680]
+    PR-AUC  95% CI: [0.237, 0.313]  (2000/2000 valid resamples)
+
+  [LB strict, excl 16 unseen-KL hosts] novel stratum: n=1347, n_pos=215
+    ROC-AUC 95% CI: [0.601, 0.696]
+    PR-AUC  95% CI: [0.236, 0.329]  (2000/2000 valid resamples)
+
+  [LB permissive, incl 16 unseen-KL hosts] novel stratum: n=1924, n_pos=525
+    ROC-AUC 95% CI: [0.590, 0.647]
+    PR-AUC  95% CI: [0.336, 0.406]  (2000/2000 valid resamples)
+
+  [LB permissive, excl 16 unseen-KL hosts] novel stratum: n=1508, n_pos=376
+    ROC-AUC 95% CI: [0.568, 0.638]
+    PR-AUC  95% CI: [0.314, 0.401]  (2000/2000 valid resamples)
+
+==================================================================
+GUARD SUMMARY
+==================================================================
+GUARD 1: PASSED (see training log above)
+GUARD 2: 16/74 KlebPhaCol hosts have a KL type absent from the training serotype vocabulary (all-zero vector).
+  Handled via incl/excl_unseen_kl reporting throughout above, not just a separate note. For reference, those 16 hosts ALONE:
+    [LB strict] unseen-KL hosts only: n=769 n_pos=116 ROC-AUC=0.458 PR-AUC=0.156
+    [LB permissive] unseen-KL hosts only: n=832 n_pos=179 ROC-AUC=0.505 PR-AUC=0.240
+    [TSB strict] unseen-KL hosts only: n=748 n_pos=140 ROC-AUC=0.458 PR-AUC=0.190

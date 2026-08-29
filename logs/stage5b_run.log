@@ -1,0 +1,140 @@
+==================================================================
+PART 3: COVERAGE AS ITS OWN METRIC
+==================================================================
+  TropiSEQ coverage: 24/187 RBPs pass bitscore>75 + coverage>0.8 (12.8%)
+
+  TropiSEQ: 24/187 RBPs scored, 23/52 phages get >=1 scored RBP
+  PHL-RBP+S: 193/193 RBPs scored, 52/52 phages get >=1 scored RBP (100% by construction -- it has no abstention mechanism; that is a limitation of PHL-RBP+S, not an advantage over TropiSEQ)
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+
+==================================================================
+PART 1: COVERED-SUBSET COMPARISON (the like-for-like number)
+==================================================================
+Restricted to the 23 phages TropiSEQ actually scored: ['Roth08', 'Roth09', 'Roth10', 'Roth24', 'Roth30', 'Roth42', 'Roth44', 'Roth47', 'Roth61', 'Roth71', 'Roth72', 'Roth74', 'Roth75', 'Roth83', 'Roth84', 'Roth85', 'Roth87', 'Roth93', 'Roth96', 'RothD', 'RothG', 'RothI', 'RothJ']
+
+--- LB strict ---
+
+  [LB strict]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           1684    158       9.4%  1.00x     0.411     0.079
+    PHL-RBP+S   novel               74      3       4.1%  0.43x     0.155     0.048
+    PHL-RBP+S   related            289     13       4.5%  0.48x     0.351     0.039
+    PHL-RBP+S   near-identical    1321    142      10.7%  1.15x     0.413     0.091
+    TropiSEQ    overall           1684    158       9.4%  1.00x     0.516     0.123
+    TropiSEQ    novel               74      3       4.1%  0.43x     0.500     0.041
+    TropiSEQ    related            289     13       4.5%  0.48x     0.692     0.412
+    TropiSEQ    near-identical    1321    142      10.7%  1.15x     0.500     0.107
+
+--- LB permissive ---
+
+  [LB permissive]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           1702    176      10.3%  1.00x     0.418     0.088
+    PHL-RBP+S   novel               74      3       4.1%  0.39x     0.155     0.048
+    PHL-RBP+S   related            296     20       6.8%  0.65x     0.281     0.050
+    PHL-RBP+S   near-identical    1332    153      11.5%  1.11x     0.429     0.101
+    TropiSEQ    overall           1702    176      10.3%  1.00x     0.526     0.149
+    TropiSEQ    novel               74      3       4.1%  0.39x     0.500     0.041
+    TropiSEQ    related            296     20       6.8%  0.65x     0.725     0.487
+    TropiSEQ    near-identical    1332    153      11.5%  1.11x     0.500     0.115
+
+--- TSB strict ---
+
+  [TSB strict]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           1684    186      11.0%  1.00x     0.476     0.105
+    PHL-RBP+S   novel               74      3       4.1%  0.37x     0.146     0.037
+    PHL-RBP+S   related            291     11       3.8%  0.34x     0.282     0.029
+    PHL-RBP+S   near-identical    1319    172      13.0%  1.18x     0.488     0.125
+    TropiSEQ    overall           1684    186      11.0%  1.00x     0.510     0.122
+    TropiSEQ    novel               74      3       4.1%  0.37x     0.500     0.041
+    TropiSEQ    related            291     11       3.8%  0.34x     0.678     0.266
+    TropiSEQ    near-identical    1319    172      13.0%  1.18x     0.500     0.130
+
+==================================================================
+PART 2: DEPOLYMERASE-DOMAIN COMPARISON (DepoScope>=0.5, TropiSEQ's own input)
+==================================================================
+69 DepoScope>=0.5 RBPs across 46 phages
+  TropiSEQ coverage: 8/63 RBPs pass bitscore>75 + coverage>0.8 (12.7%)
+  -> 5/46 DepoScope-input phages get a TropiSEQ call
+  Coverage on RBPdetect (193-RBP) set: 12.8%  vs  DepoScope (69-RBP) set: 12.7%
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+Embedding 13 new sequences with ESM-2 650M (return_contacts=False)...
+  0%|          | 0/13 [00:00<?, ?it/s]  8%|▊         | 1/13 [00:01<00:16,  1.40s/it] 15%|█▌        | 2/13 [00:02<00:16,  1.47s/it] 23%|██▎       | 3/13 [00:08<00:33,  3.33s/it] 31%|███       | 4/13 [00:09<00:23,  2.58s/it] 38%|███▊      | 5/13 [00:11<00:16,  2.10s/it] 46%|████▌     | 6/13 [00:12<00:12,  1.84s/it] 54%|█████▍    | 7/13 [00:13<00:10,  1.68s/it] 62%|██████▏   | 8/13 [00:19<00:14,  2.91s/it] 69%|██████▉   | 9/13 [00:24<00:14,  3.63s/it] 77%|███████▋  | 10/13 [00:33<00:15,  5.17s/it] 85%|████████▍ | 11/13 [00:38<00:10,  5.18s/it] 92%|█████████▏| 12/13 [00:43<00:05,  5.16s/it]100%|██████████| 13/13 [00:49<00:00,  5.31s/it]100%|██████████| 13/13 [00:49<00:00,  3.78s/it]
+
+--- LB strict ---
+
+  [LB strict]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           3187    420      13.2%  1.00x     0.490     0.127
+    TropiSEQ    overall           3187    420      13.2%  1.00x     0.506     0.142
+
+--- LB permissive ---
+
+  [LB permissive]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           3404    637      18.7%  1.00x     0.467     0.174
+    TropiSEQ    overall           3404    637      18.7%  1.00x     0.507     0.199
+
+--- TSB strict ---
+
+  [TSB strict]
+    model       stratum              n  n_pos  base_rate   lift   ROC-AUC    PR-AUC
+    PHL-RBP+S   overall           3099    555      17.9%  1.00x     0.484     0.171
+    TropiSEQ    overall           3099    555      17.9%  1.00x     0.503     0.183

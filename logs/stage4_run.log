@@ -1,0 +1,137 @@
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+Excluding 7 RBP-overlap phages from training: ['K2064PH2', 'K28PH129', 'K30lambda2', 'K32PH164C1', 'K40PH129C1', 'K52PH129C1', 'K65PH164']
+GUARD 1 PASSED: 105 -> 98 distinct Boeckaerts phages in training (7 excluded, none present).
+Serotype vocabulary: 87 columns (from Kaptive 'Best match type' on 200 training hosts)
+Training rows: 458,504  positives: 12,679  negatives: 445,825  (base rate 2.77%)
+Training (no CV, single model, ~480k rows x 1367 features)...
+Wrote Results/klebphacol/stage4_model.pkl
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+
+==================================================================
+PREDICTION: full RBP set (193 RBPs)
+==================================================================
+Scored 3848 (phage, host) combinations
+
+==================================================================
+SENSITIVITY: subsampled RBP set (top-3/phage by scores_RBPDetect)
+==================================================================
+31/52 phages have >3 RBPs and get subsampled (N=3 = round(274/105=2.610))
+
+==================================================================
+RESULTS: LB strict
+==================================================================
+
+  [full RBP set]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3611     486      13.5%     0.548     0.155
+    novel                557     107      19.2%     0.642     0.277
+    related              289      13       4.5%     0.351     0.039
+    near-identical      2765     366      13.2%     0.535     0.149
+
+  [subsampled top-3/phage]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3611     486      13.5%     0.537     0.152
+    novel                557     107      19.2%     0.618     0.264
+    related              289      13       4.5%     0.351     0.039
+    near-identical      2765     366      13.2%     0.529     0.148
+
+  Sensitivity delta (full -> subsampled), novel stratum (the honest external number):
+    ROC-AUC: 0.642 -> 0.618  (delta -0.024)
+    PR-AUC:  0.277 -> 0.264  (delta -0.014)
+    -> metrics move materially; report the subsampled version as primary
+
+==================================================================
+RESULTS: LB permissive
+==================================================================
+
+  [full RBP set]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3848     723      18.8%     0.548     0.219
+    novel                666     216      32.4%     0.626     0.431
+    related              296      20       6.8%     0.281     0.050
+    near-identical      2886     487      16.9%     0.539     0.188
+
+  [subsampled top-3/phage]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3848     723      18.8%     0.542     0.216
+    novel                666     216      32.4%     0.614     0.424
+    related              296      20       6.8%     0.281     0.050
+    near-identical      2886     487      16.9%     0.536     0.187
+
+  Sensitivity delta (full -> subsampled), novel stratum (the honest external number):
+    ROC-AUC: 0.626 -> 0.614  (delta -0.012)
+    PR-AUC:  0.431 -> 0.424  (delta -0.008)
+    -> metrics barely move; the 1.42x RBP-count inflation is NOT driving results
+
+==================================================================
+RESULTS: TSB strict
+==================================================================
+
+  [full RBP set]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3476     638      18.4%     0.560     0.210
+    novel                557     174      31.2%     0.628     0.403
+    related              291      11       3.8%     0.282     0.029
+    near-identical      2628     453      17.2%     0.556     0.194
+
+  [subsampled top-3/phage]
+    stratum                n   n_pos  base_rate   ROC-AUC    PR-AUC
+    overall             3476     638      18.4%     0.549     0.205
+    novel                557     174      31.2%     0.607     0.390
+    related              291      11       3.8%     0.282     0.029
+    near-identical      2628     453      17.2%     0.551     0.192
+
+  Sensitivity delta (full -> subsampled), novel stratum (the honest external number):
+    ROC-AUC: 0.628 -> 0.607  (delta -0.021)
+    PR-AUC:  0.403 -> 0.390  (delta -0.014)
+    -> metrics move materially; report the subsampled version as primary
+
+==================================================================
+BOOTSTRAP 95% CI, novel stratum, full RBP set (n_boot=2000)
+==================================================================
+
+  [LB strict] novel stratum: n=557, n_pos=107
+    ROC-AUC 95% CI: [0.584, 0.700]
+    PR-AUC  95% CI: [0.225, 0.337]  (2000/2000 valid resamples)
+
+  [LB permissive] novel stratum: n=666, n_pos=216
+    ROC-AUC 95% CI: [0.580, 0.672]
+    PR-AUC  95% CI: [0.377, 0.492]  (2000/2000 valid resamples)
+
+==================================================================
+GUARD SUMMARY
+==================================================================
+GUARD 1: PASSED (see training log above)
+GUARD 2: 16/74 KlebPhaCol hosts have a KL type absent from the training serotype vocabulary (all-zero vector).
+  More than a handful -- reporting their metrics separately:
+    [LB strict] absent-KL-type hosts only: n=769 n_pos=116 ROC-AUC=0.458 PR-AUC=0.156
+    [LB permissive] absent-KL-type hosts only: n=832 n_pos=179 ROC-AUC=0.505 PR-AUC=0.240
+    [TSB strict] absent-KL-type hosts only: n=748 n_pos=140 ROC-AUC=0.458 PR-AUC=0.190

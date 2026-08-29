@@ -1,0 +1,51 @@
+
+==================================================================
+GUARD 2: KlebPhaCol host KL types absent from training vocabulary
+==================================================================
+Ambiguous loci in training itself, resolved to majority type:
+  KL15: {'K15': 2, 'Capsule null': 1} -> using 'K15'
+  KL22: {'K22': 3, 'K37': 1} -> using 'K22'
+  KL39: {'K39': 5, 'Capsule null': 1} -> using 'K39'
+  KL57: {'K57': 2, 'Capsule null': 1} -> using 'K57'
+  KL62: {'K62': 3, 'Capsule null': 1} -> using 'K62'
+
+16/74 KlebPhaCol hosts have a KL locus absent from the training vocabulary (all-zero serotype vector):
+      strain kl_locus
+  NCTC_13368     KL53
+     921530F     KL53
+   4_1_44FAA     KL28
+       49856    KL106
+CFI_131_KPC2    KL106
+       46704    KL106
+       45071    KL106
+       51851    KL106
+       KLEB9     KL28
+     164121Y    KL124
+     164358U     KL52
+       L0593     KL52
+   MGH_78578     KL52
+       L1522    KL113
+       KLEB4     KL28
+     163862E    KL116
+==========================================================================================
+BOOTSTRAP 95% CI, near-identical and related strata, PHL-RBP+S full RBP set
+Two-sided test against 0.5 (chance)
+==========================================================================================
+
+--- LB strict ---
+  [incl_unseen_kl] related          n=289    n_pos=13    ROC-AUC=0.351  95% CI=[0.192, 0.534]  -> not distinguishable from 0.5
+  [incl_unseen_kl] near-identical   n=1616   n_pos=166   ROC-AUC=0.403  95% CI=[0.358, 0.449]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [excl_unseen_kl] related          n=225    n_pos=11    ROC-AUC=0.318  95% CI=[0.181, 0.462]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [excl_unseen_kl] near-identical   n=1270   n_pos=144   ROC-AUC=0.426  95% CI=[0.374, 0.477]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+
+--- LB permissive ---
+  [incl_unseen_kl] related          n=296    n_pos=20    ROC-AUC=0.281  95% CI=[0.169, 0.414]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [incl_unseen_kl] near-identical   n=1628   n_pos=178   ROC-AUC=0.416  95% CI=[0.371, 0.465]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [excl_unseen_kl] related          n=232    n_pos=18    ROC-AUC=0.269  95% CI=[0.172, 0.379]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [excl_unseen_kl] near-identical   n=1276   n_pos=150   ROC-AUC=0.428  95% CI=[0.375, 0.482]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+
+--- TSB strict ---
+  [incl_unseen_kl] related          n=291    n_pos=11    ROC-AUC=0.282  95% CI=[0.118, 0.479]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [incl_unseen_kl] near-identical   n=1612   n_pos=194   ROC-AUC=0.460  95% CI=[0.420, 0.502]  -> not distinguishable from 0.5
+  [excl_unseen_kl] related          n=227    n_pos=10    ROC-AUC=0.277  95% CI=[0.122, 0.456]  -> ANTI-PREDICTIVE (CI entirely below 0.5)
+  [excl_unseen_kl] near-identical   n=1267   n_pos=163   ROC-AUC=0.493  95% CI=[0.444, 0.541]  -> not distinguishable from 0.5
