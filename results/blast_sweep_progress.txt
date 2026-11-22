@@ -1,0 +1,11 @@
+=== blast90 starting 10:17:51 ===
+=== blast90 done 10:24:37 ===
+=== blast80 starting 10:24:37 ===
+=== blast80 done 10:30:14 ===
+=== blast70 starting 10:30:14 ===
+=== blast70 done 10:34:57 ===
+=== blast60 starting 10:34:57 ===
+=== blast60 done 10:39:05 ===
+=== blast50 starting 10:39:05 ===
+=== blast50 done 10:42:25 ===
+ALL DONE 10:42:25

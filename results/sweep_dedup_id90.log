@@ -1,0 +1,80 @@
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+  identity clustering at 90%: 105 phages -> 38 groups (67 merges, 274 RBPs compared)
+Phage clustering: 105 phages -> 38 groups (merged by 90% RBP identity)
+Deduplicated: 487,400 -> 25,120 rows (matches 2c_rbp_only.py weighting)
+Rows: 25,120   folds: 38
+Features: RBP embedding + 87 serotype columns (identical to PHL-RBP+S)
+Output: results/2d_phage_holdout_id90.pkl
+python.exe : 
+At C:\Users\IamAh\Desktop\TheKeyMotif\run_dedup_sweep.ps1:14 char:5
++     & $py analysis\02_ablation\2d_phage_holdout.py --cluster-identity ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+phage-holdout CV:   0%|          | 0/38 [00:00<?, ?it/s]C:\Users\IamAh\anaconda3\envs\keymotif\Lib\site-packages\xgboost\core.py:158: UserWarning: 
+[04:26:37] WARNING: 
+C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-08cbc0333d8d4aae1-1\xgboost\xgboost-ci-windows\src\common\error_msg.cc:58: Falling 
+back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, 
+while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+
+phage-holdout CV:   3%|2         | 1/38 [00:12<07:44, 12.54s/it]
+phage-holdout CV:   5%|5         | 2/38 [00:25<07:30, 12.51s/it]
+phage-holdout CV:   8%|7         | 3/38 [00:37<07:20, 12.60s/it]
+phage-holdout CV:  11%|#         | 4/38 [00:52<07:34, 13.37s/it]
+phage-holdout CV:  13%|#3        | 5/38 [01:06<07:27, 13.56s/it]
+phage-holdout CV:  16%|#5        | 6/38 [01:19<07:10, 13.47s/it]
+phage-holdout CV:  18%|#8        | 7/38 [01:32<06:57, 13.48s/it]
+phage-holdout CV:  21%|##1       | 8/38 [01:45<06:39, 13.32s/it]
+phage-holdout CV:  24%|##3       | 9/38 [01:59<06:26, 13.33s/it]
+phage-holdout CV:  26%|##6       | 10/38 [02:12<06:14, 13.36s/it]
+phage-holdout CV:  29%|##8       | 11/38 [02:26<06:00, 13.35s/it]
+phage-holdout CV:  32%|###1      | 12/38 [02:38<05:43, 13.20s/it]
+phage-holdout CV:  34%|###4      | 13/38 [02:52<05:31, 13.25s/it]
+phage-holdout CV:  37%|###6      | 14/38 [03:04<05:14, 13.08s/it]
+phage-holdout CV:  39%|###9      | 15/38 [03:18<05:03, 13.21s/it]
+phage-holdout CV:  42%|####2     | 16/38 [03:31<04:48, 13.10s/it]
+phage-holdout CV:  45%|####4     | 17/38 [03:44<04:35, 13.12s/it]
+phage-holdout CV:  47%|####7     | 18/38 [03:57<04:20, 13.04s/it]
+phage-holdout CV:  50%|#####     | 19/38 [04:11<04:13, 13.33s/it]
+phage-holdout CV:  53%|#####2    | 20/38 [04:25<04:03, 13.52s/it]
+phage-holdout CV:  55%|#####5    | 21/38 [04:38<03:50, 13.55s/it]
+phage-holdout CV:  58%|#####7    | 22/38 [04:52<03:35, 13.47s/it]
+phage-holdout CV:  61%|######    | 23/38 [05:05<03:19, 13.28s/it]
+phage-holdout CV:  63%|######3   | 24/38 [05:18<03:07, 13.36s/it]
+phage-holdout CV:  66%|######5   | 25/38 [05:31<02:51, 13.17s/it]
+phage-holdout CV:  68%|######8   | 26/38 [05:44<02:36, 13.03s/it]
+phage-holdout CV:  71%|#######1  | 27/38 [05:56<02:22, 12.92s/it]
+phage-holdout CV:  74%|#######3  | 28/38 [06:09<02:08, 12.88s/it]
+phage-holdout CV:  76%|#######6  | 29/38 [06:21<01:53, 12.66s/it]
+phage-holdout CV:  79%|#######8  | 30/38 [06:34<01:41, 12.73s/it]
+phage-holdout CV:  82%|########1 | 31/38 [06:47<01:28, 12.70s/it]
+phage-holdout CV:  84%|########4 | 32/38 [07:00<01:17, 12.93s/it]
+phage-holdout CV:  87%|########6 | 33/38 [07:13<01:04, 12.89s/it]
+phage-holdout CV:  89%|########9 | 34/38 [07:26<00:51, 12.81s/it]
+phage-holdout CV:  92%|#########2| 35/38 [07:39<00:38, 12.97s/it]
+phage-holdout CV:  95%|#########4| 36/38 [07:52<00:25, 12.92s/it]
+phage-holdout CV:  97%|#########7| 37/38 [08:04<00:12, 12.87s/it]
+phage-holdout CV: 100%|##########| 38/38 [08:17<00:00, 12.76s/it]
+phage-holdout CV: 100%|##########| 38/38 [08:17<00:00, 13.09s/it]
+
+==============================================================
+PHAGE-HELD-OUT AUC: 0.652    PR-AUC: 0.088
+==============================================================
+  THE 2x2:                bacterial split   phage split
+    RBP + serotype              0.817          0.652
+    RBP only                    0.701              ?
+    serotype only               0.589              n/a
+  dataset positive rate:      0.033
+
+  -> Partial. Some transferable RBP signal, but a large share of
+     the bacterial-split performance does not survive unseen phages.
+
+  Wrote results/2d_phage_holdout_id90.pkl

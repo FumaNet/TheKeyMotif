@@ -1,0 +1,67 @@
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+  identity clustering at 70%: 105 phages -> 25 groups (80 merges, 274 RBPs compared)
+Phage clustering: 105 phages -> 25 groups (merged by 70% RBP identity)
+Deduplicated: 487,400 -> 25,120 rows (matches 2c_rbp_only.py weighting)
+Rows: 25,120   folds: 25
+Features: RBP embedding + 87 serotype columns (identical to PHL-RBP+S)
+Output: results/2d_phage_holdout_id70.pkl
+python.exe : 
+At C:\Users\IamAh\Desktop\TheKeyMotif\run_dedup_sweep.ps1:14 char:5
++     & $py analysis\02_ablation\2d_phage_holdout.py --cluster-identity ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+phage-holdout CV:   0%|          | 0/25 [00:00<?, ?it/s]C:\Users\IamAh\anaconda3\envs\keymotif\Lib\site-packages\xgboost\core.py:158: UserWarning: 
+[04:41:33] WARNING: 
+C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-08cbc0333d8d4aae1-1\xgboost\xgboost-ci-windows\src\common\error_msg.cc:58: Falling 
+back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, 
+while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+
+phage-holdout CV:   4%|4         | 1/25 [00:13<05:12, 13.02s/it]
+phage-holdout CV:   8%|8         | 2/25 [00:26<04:59, 13.02s/it]
+phage-holdout CV:  12%|#2        | 3/25 [00:38<04:45, 12.98s/it]
+phage-holdout CV:  16%|#6        | 4/25 [00:52<04:33, 13.02s/it]
+phage-holdout CV:  20%|##        | 5/25 [01:01<03:52, 11.64s/it]
+phage-holdout CV:  24%|##4       | 6/25 [01:16<04:01, 12.73s/it]
+phage-holdout CV:  28%|##8       | 7/25 [01:28<03:49, 12.77s/it]
+phage-holdout CV:  32%|###2      | 8/25 [01:42<03:40, 13.00s/it]
+phage-holdout CV:  36%|###6      | 9/25 [01:56<03:31, 13.19s/it]
+phage-holdout CV:  40%|####      | 10/25 [02:08<03:15, 13.02s/it]
+phage-holdout CV:  44%|####4     | 11/25 [02:21<02:59, 12.82s/it]
+phage-holdout CV:  48%|####8     | 12/25 [02:32<02:43, 12.54s/it]
+phage-holdout CV:  52%|#####2    | 13/25 [02:44<02:28, 12.34s/it]
+phage-holdout CV:  56%|#####6    | 14/25 [02:57<02:16, 12.40s/it]
+phage-holdout CV:  60%|######    | 15/25 [03:09<02:02, 12.26s/it]
+phage-holdout CV:  64%|######4   | 16/25 [03:21<01:48, 12.11s/it]
+phage-holdout CV:  68%|######8   | 17/25 [03:32<01:36, 12.03s/it]
+phage-holdout CV:  72%|#######2  | 18/25 [03:45<01:24, 12.10s/it]
+phage-holdout CV:  76%|#######6  | 19/25 [03:56<01:12, 12.01s/it]
+phage-holdout CV:  80%|########  | 20/25 [04:08<01:00, 12.00s/it]
+phage-holdout CV:  84%|########4 | 21/25 [04:21<00:48, 12.02s/it]
+phage-holdout CV:  88%|########8 | 22/25 [04:33<00:36, 12.03s/it]
+phage-holdout CV:  92%|#########2| 23/25 [04:45<00:24, 12.07s/it]
+phage-holdout CV:  96%|#########6| 24/25 [04:57<00:11, 12.00s/it]
+phage-holdout CV: 100%|##########| 25/25 [05:09<00:00, 12.03s/it]
+phage-holdout CV: 100%|##########| 25/25 [05:09<00:00, 12.37s/it]
+
+==============================================================
+PHAGE-HELD-OUT AUC: 0.59    PR-AUC: 0.059
+==============================================================
+  THE 2x2:                bacterial split   phage split
+    RBP + serotype              0.817          0.590
+    RBP only                    0.701              ?
+    serotype only               0.589              n/a
+  dataset positive rate:      0.033
+
+  -> Collapse. The bacterial-split number rests substantially on
+     phage-identity recall. Report this; it reframes the paper.
+
+  Wrote results/2d_phage_holdout_id70.pkl

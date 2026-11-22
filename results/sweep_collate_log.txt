@@ -1,0 +1,49 @@
+Loaded cache: 487,400 pairs, 3,880 host proteins, 274 RBPs
+  identity clustering at 70%: 105 phages -> 25 groups (80 merges, 274 RBPs compared)
+  identity clustering at 60%: 105 phages -> 24 groups (81 merges, 274 RBPs compared)
+  identity clustering at 50%: 105 phages -> 21 groups (84 merges, 274 RBPs compared)
+  identity clustering at 40%: 105 phages -> 19 groups (86 merges, 274 RBPs compared)
+# Phage-held-out identity sweep -- collated results
+
+One environment, one machine: python 3.12.13, xgboost 2.1.4 (USE_CUDA=True), numpy 2.2.2, pandas 2.2.3, scikit-learn 1.6.1, RapidFuzz 3.14.6, GTX 1650 driver 566.36, KM_DEVICE unset (cuda), random_state=0.
+
+Chance: ROC 0.500, PR 0.033.
+
+
+## Main table
+
+| thresh | ROC-AUC | PR-AUC | published ROC | delta | folds | largest fold | share | zero-pos folds | pairs | positives |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 70% | 0.569 | 0.050 | n/a | n/a | 25 | 246,180 | 50.5% | 2 of 25 | 10006 | 333 |
+| 60% | 0.564 | 0.050 | n/a | n/a | 24 | 246,180 | 50.5% | 2 of 24 | 10006 | 333 |
+| 50% | 0.567 | 0.053 | n/a | n/a | 21 | 246,180 | 50.5% | 2 of 21 | 10006 | 333 |
+| 40% | 0.546 | 0.049 | n/a | n/a | 19 | 246,180 | 50.5% | 2 of 19 | 10006 | 333 |
+
+## Largest fold vs the rest (same predictions, split by fold)
+
+| thresh | largest-fold pairs | pos | ROC | PR | other pairs | pos | ROC | PR |
+|---|---|---|---|---|---|---|---|---|
+| 70% | 4166 | 70 | 0.410 | 0.0137 | 5840 | 263 | 0.616 | 0.0804 |
+| 60% | 4166 | 70 | 0.410 | 0.0137 | 5840 | 263 | 0.609 | 0.0794 |
+| 50% | 4166 | 70 | 0.410 | 0.0137 | 5840 | 263 | 0.616 | 0.0863 |
+| 40% | 4166 | 70 | 0.410 | 0.0137 | 5840 | 263 | 0.592 | 0.0840 |
+
+## Checks
+
+- id70: recomputed ROC 0.5686 vs stored 0.569 -- OK; folds 25 vs preflight 25 -- OK
+- id60: recomputed ROC 0.5643 vs stored 0.564 -- OK; folds 24 vs preflight 24 -- OK
+- id50: recomputed ROC 0.5671 vs stored 0.567 -- OK; folds 21 vs preflight 21 -- OK
+- id40: recomputed ROC 0.5461 vs stored 0.546 -- OK; folds 19 vs preflight 19 -- OK
+
+## Notes
+
+- id100: no .pkl -- not run
+- id95: no .pkl -- not run
+- id90: no .pkl -- not run
+- id80: no .pkl -- not run
+
+## Not run (per pre-flight)
+
+- 30%: degenerate, one group holds 94 of 105 phages
+- 20%, 10%: collapsed to a single group; nothing to train on
+
