@@ -118,12 +118,16 @@ def select_central(pairs, rbp, sero_map):
     """
     try:
         from rapidfuzz.distance import Levenshtein
-        sim = Levenshtein.normalized_similarity
     except ImportError:
-        import difflib
-
-        def sim(a, b):
-            return difflib.SequenceMatcher(None, a, b).ratio()
+        raise SystemExit(
+            "rapidfuzz is required: this metric is normalised Levenshtein "
+            "identity over whole sequences.\n"
+            "  pip install rapidfuzz\n"
+            "There is deliberately no fallback. difflib.SequenceMatcher.ratio() "
+            "is a DIFFERENT metric (it discounts common elements as junk), and "
+            "an earlier silent fallback to it is what produced the group counts "
+            "this sweep had to be re-derived to explain -- see REPRODUCIBILITY.md.")
+    sim = Levenshtein.normalized_similarity
 
     pos = pairs[pairs["label"] == 1].copy()
     pos["serotype"] = pos["accession"].map(sero_map)

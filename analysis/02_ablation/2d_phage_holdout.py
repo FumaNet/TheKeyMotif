@@ -128,6 +128,52 @@ def cluster_phages_by_rbp(rbp_csv="data/RBPbase.csv"):
     return {ph: labels[r] for ph, r in groups.items()}
 
 
+def load_groups_file(path, rbp_csv="data/RBPbase.csv"):
+    """
+    Read a precomputed phage grouping from CSV (columns: phage_ID, group_id).
+
+    For groupings this script cannot compute itself -- e.g. BLASTp-pident
+    adjacency, which needs an external aligner. The caller is responsible for
+    the adjacency rule; this only validates and relabels.
+
+    Every phage in `rbp_csv` must be present, because a phage with no group
+    would be silently dropped from the split and quietly shrink the test set.
+    """
+    if not os.path.exists(path):
+        raise SystemExit(f"--groups-file: no such file: {path}")
+    g = pd.read_csv(path)
+    missing_cols = {"phage_ID", "group_id"} - set(g.columns)
+    if missing_cols:
+        raise SystemExit(
+            f"{path}: missing column(s) {sorted(missing_cols)}; "
+            f"file has {list(g.columns)}")
+    if g["phage_ID"].duplicated().any():
+        dup = sorted(g.loc[g["phage_ID"].duplicated(), "phage_ID"].unique())
+        raise SystemExit(f"{path}: duplicate phage_ID rows: {dup[:10]}")
+
+    if not os.path.exists(rbp_csv):
+        raise SystemExit(f"--groups-file validation needs {rbp_csv}.")
+    expected = set(pd.read_csv(rbp_csv)["phage_ID"].unique())
+    have = set(g["phage_ID"])
+    absent = sorted(expected - have)
+    if absent:
+        raise SystemExit(
+            f"{path}: {len(absent)} of {len(expected)} phages in {rbp_csv} are "
+            f"missing from the grouping file.\n"
+            f"  first few: {absent[:10]}\n"
+            "Every phage must be assigned a group, or it would be dropped from "
+            "the split and silently shrink the test set.")
+    extra = sorted(have - expected)
+    if extra:
+        print(f"  note: {len(extra)} phage(s) in the grouping file are absent "
+              f"from {rbp_csv} and will go unused: {extra[:10]}")
+
+    g = g[g["phage_ID"].isin(expected)]
+    labels = {r: i for i, r in enumerate(sorted(g["group_id"].unique()))}
+    print(f"  groups file {path}: {len(g)} phages -> {len(labels)} groups")
+    return dict(zip(g["phage_ID"], g["group_id"].map(labels)))
+
+
 def cluster_phages_by_identity(threshold, rbp_csv="data/RBPbase.csv"):
     """
     Merge phages whose RBPs exceed a sequence-identity threshold.
@@ -151,14 +197,16 @@ def cluster_phages_by_identity(threshold, rbp_csv="data/RBPbase.csv"):
         raise SystemExit(f"--cluster-identity needs {rbp_csv} (RBP sequences).")
     try:
         from rapidfuzz.distance import Levenshtein
-        sim = Levenshtein.normalized_similarity
     except ImportError:
-        import difflib
-        print("  rapidfuzz not installed; falling back to difflib (much slower)")
-        print("  pip install rapidfuzz")
-
-        def sim(a, b):
-            return difflib.SequenceMatcher(None, a, b).ratio()
+        raise SystemExit(
+            "rapidfuzz is required: this metric is normalised Levenshtein "
+            "identity over whole sequences.\n"
+            "  pip install rapidfuzz\n"
+            "There is deliberately no fallback. difflib.SequenceMatcher.ratio() "
+            "is a DIFFERENT metric (it discounts common elements as junk), and "
+            "an earlier silent fallback to it is what produced the group counts "
+            "this sweep had to be re-derived to explain -- see REPRODUCIBILITY.md.")
+    sim = Levenshtein.normalized_similarity
 
     rbp = pd.read_csv(rbp_csv)
     low = {c.lower(): c for c in rbp.columns}
@@ -212,6 +260,14 @@ def main():
                     help="Merge phages whose RBPs reach THRESH sequence "
                          "identity (e.g. 0.95). The phage-side analogue of the "
                          "bacterial similarity sweep. Overrides --cluster-rbp.")
+    ap.add_argument("--groups-file", metavar="CSV",
+                    help="Use a precomputed phage grouping (columns "
+                         "phage_ID,group_id) instead of computing one. For "
+                         "adjacency rules this script cannot compute, e.g. "
+                         "BLASTp pident. Overrides --cluster-identity and "
+                         "--cluster-rbp. Output name follows the file's "
+                         "basename: groups_blast90.csv -> "
+                         "results/2d_phage_holdout_blast90.pkl")
     ap.add_argument("--no-serotype", action="store_true",
                     help="Drop the serotype one-hot: RBP embedding only. "
                          "Completes the 2x2 with 2c_rbp_only.py.")
@@ -222,7 +278,16 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    if args.cluster_identity is not None:
+    if args.groups_file:
+        stem = os.path.splitext(os.path.basename(args.groups_file))[0]
+        if stem.startswith("groups_"):
+            stem = stem[len("groups_"):]
+        if not stem:
+            raise SystemExit(
+                f"--groups-file {args.groups_file}: cannot derive an output "
+                "name from this basename.")
+        tag = f"_{stem}"
+    elif args.cluster_identity is not None:
         tag = f"_id{int(args.cluster_identity*100)}"
     elif args.cluster_rbp:
         tag = "_clustered"
@@ -234,7 +299,10 @@ def main():
     pairs, host_emb, virus_emb = kd.load()
 
     pairs = pairs.copy()
-    if args.cluster_identity is not None:
+    if args.groups_file:
+        pg = load_groups_file(args.groups_file)
+        how = f"precomputed grouping {os.path.basename(args.groups_file)}"
+    elif args.cluster_identity is not None:
         pg = cluster_phages_by_identity(args.cluster_identity)
         how = f"{args.cluster_identity:.0%} RBP identity"
     elif args.cluster_rbp:
@@ -256,6 +324,13 @@ def main():
             pairs = pairs.dropna(subset=["phage_group"])
         print(f"Phage clustering: {pairs['phage_ID'].nunique()} phages -> "
               f"{pairs['phage_group'].nunique()} groups (merged by {how})")
+        if args.groups_file:
+            gs = (pairs.drop_duplicates(subset=["phage_ID"])
+                       .groupby("phage_group").size().sort_values(ascending=False))
+            print(f"  group sizes (phages): largest {int(gs.max())}  "
+                  f"median {int(gs.median())}  singletons "
+                  f"{int((gs == 1).sum())} of {len(gs)}")
+            print(f"  largest groups: {[int(x) for x in gs.head(5)]}")
 
     if args.dedup:
         before = len(pairs)

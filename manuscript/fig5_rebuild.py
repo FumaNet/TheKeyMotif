@@ -1,11 +1,12 @@
 """Rebuild Fig 5: median pairwise identity between MEME motif occurrences, per serotype.
 
-Identity = normalised Levenshtein identity, 1 - dist/max(len), the same definition
+Identity = normalised Levenshtein identity (rapidfuzz
+normalized_similarity, i.e. 1 - dist/max(len)), the same definition
 used for RBP redundancy control elsewhere in the paper.
 Reproduces the published K11 values (median 21%, 18/21 pairs below 30%).
 """
 import os, glob, itertools, statistics, csv
-import Levenshtein
+from rapidfuzz.distance import Levenshtein
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
@@ -24,7 +25,7 @@ def sites(path):
     return out
 
 def ident(a, b):
-    return 100.0 * (1 - Levenshtein.distance(a, b) / max(len(a), len(b)))
+    return 100.0 * Levenshtein.normalized_similarity(a, b)
 
 rows = []
 for d in sorted(os.listdir(BASE)):
