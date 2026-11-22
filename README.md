@@ -2,8 +2,7 @@
 
 Code for a revision of "Protein-level prediction of *Klebsiella* phage
 adsorption identifies conserved receptor-binding motifs" (bioRxiv
-2026.05.21.726843), a Cognitive Science and Artificial Intelligence thesis at
-Tilburg University, after three reviewer reports.
+2026.05.21.726843), after three reviewer reports.
 
 The paper has been reframed. The original novelty claim (sub-protein-resolution
 prediction) was largely anticipated by Concha-Eloko et al. 2025 (Nat Commun),
